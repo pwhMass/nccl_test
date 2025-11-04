@@ -1,0 +1,156 @@
+[Rank 0/2] Process started (PID: 14447)
+[Rank 0] NCCL configured to use IB transport with bluerdma device
+[Rank 1/2] Process started (PID: 14448)
+[Rank 1] NCCL configured to use IB transport with bluerdma device
+[Rank 0] Generated NCCL unique ID
+DESKTOP-M211L3D:14447:14447 [0] NCCL INFO cudaDriverVersion 13000
+DESKTOP-M211L3D:14448:14448 [0] NCCL INFO cudaDriverVersion 13000
+DESKTOP-M211L3D:14447:14447 [0] NCCL INFO NCCL version 2.27.7+cuda13.0
+DESKTOP-M211L3D:14448:14448 [0] NCCL INFO NCCL version 2.27.7+cuda13.0
+DESKTOP-M211L3D:14447:14447 [0] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. 
+DESKTOP-M211L3D:14448:14448 [0] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. 
+DESKTOP-M211L3D:14447:14447 [0] NCCL INFO NCCL_IB_HCA set to bluerdma
+DESKTOP-M211L3D:14448:14448 [0] NCCL INFO NCCL_IB_HCA set to bluerdma
+Setting op alloc_pd
+Setting op create_cq
+Setting op create_qp
+Setting op dealloc_pd
+Setting op dereg_mr
+Setting op destroy_cq
+Setting op destroy_qp
+Setting op modify_qp
+Setting op poll_cq
+Setting op post_recv
+Setting op post_send
+Setting op query_device_ex
+Setting op query_port
+Setting op query_qp
+Setting op reg_mr
+bluerdma device allocated
+Setting op alloc_pd
+Setting op create_cq
+Setting op create_qp
+Setting op dealloc_pd
+Setting op dereg_mr
+Setting op destroy_cq
+Setting op destroy_qp
+Setting op modify_qp
+Setting op poll_cq
+Setting op post_recv
+Setting op post_send
+Setting op query_device_ex
+Setting op query_port
+Setting op query_qp
+Setting op reg_mr
+bluerdma device allocated
+[2025-11-04T04:49:15.071056082Z DEBUG blue_rdma_driver::verbs::core] before create hardware ctx
+[2025-11-04T04:49:15.071227565Z DEBUG blue_rdma_driver::verbs::core] before load default
+[2025-11-04T04:49:15.071282891Z WARN  blue_rdma_driver::config] can't load config from /etc/bluerdma/config.toml, using default value
+[2025-11-04T04:49:15.071332111Z DEBUG blue_rdma_driver::verbs::core] before open default
+[2025-11-04T04:49:15.071692875Z INFO  bluerdma_rust::rxe::ctx_ops] Querying device attributes
+[2025-11-04T04:49:15.071741981Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+
+[2025-11-04 12:49:15] DESKTOP-M211L3D:14447:14447 [0] transport/net_ib.cc:472 NCCL WARN Could not find real path of bluerdma0 (/sys/class/infiniband/bluerdma0/device)
+DESKTOP-M211L3D:14447:14447 [0] NCCL INFO NET/IB: [0] bluerdma0:uverbs0:1/RoCE provider=None speed=400000 context=0x5f88af46c310 pciPath=(null) ar=0
+DESKTOP-M211L3D:14447:14447 [0] NCCL INFO NET/IB : Made virtual device [0] name=bluerdma0 speed=400000 ndevs=1
+[2025-11-04T04:49:15.072035592Z DEBUG blue_rdma_driver::verbs::core] before create hardware ctx
+[2025-11-04T04:49:15.072090020Z DEBUG blue_rdma_driver::verbs::core] before load default
+[2025-11-04T04:49:15.072130993Z WARN  blue_rdma_driver::config] can't load config from /etc/bluerdma/config.toml, using default value
+[2025-11-04T04:49:15.072170225Z DEBUG blue_rdma_driver::verbs::core] before open default
+[2025-11-04T04:49:15.072382459Z INFO  bluerdma_rust::rxe::ctx_ops] Querying device attributes
+[2025-11-04T04:49:15.072416228Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+
+[2025-11-04 12:49:15] DESKTOP-M211L3D:14447:14447 [0] transport/net_ib.cc:472 NCCL WARN Could not find real path of bluerdma1 (/sys/class/infiniband/bluerdma1/device)
+DESKTOP-M211L3D:14447:14447 [0] NCCL INFO NET/IB: [1] bluerdma1:uverbs1:1/RoCE provider=None speed=400000 context=0x5f88af475840 pciPath=(null) ar=0
+DESKTOP-M211L3D:14447:14447 [0] NCCL INFO NET/IB : Made virtual device [1] name=bluerdma1 speed=400000 ndevs=1
+DESKTOP-M211L3D:14447:14447 [0] NCCL INFO NET/IB : Using [0]bluerdma0:1/RoCE [1]bluerdma1:1/RoCE [RO]; OOB eth0:100.82.177.43<0>
+DESKTOP-M211L3D:14447:14447 [0] NCCL INFO Initialized NET plugin IB
+[2025-11-04T04:49:15.072637553Z INFO  bluerdma_rust::rxe::ctx_ops] Allocating protection domain
+DESKTOP-M211L3D:14447:14447 [0] NCCL INFO Assigned NET plugin IB to comm
+DESKTOP-M211L3D:14447:14447 [0] NCCL INFO Using network IB
+[2025-11-04T04:49:15.072686892Z INFO  bluerdma_rust::rxe::ctx_ops] Deallocating protection domain
+Setting op alloc_pd
+Setting op create_cq
+Setting op create_qp
+Setting op dealloc_pd
+Setting op dereg_mr
+Setting op destroy_cq
+Setting op destroy_qp
+Setting op modify_qp
+Setting op poll_cq
+Setting op post_recv
+Setting op post_send
+Setting op query_device_ex
+Setting op query_port
+Setting op query_qp
+Setting op reg_mr
+bluerdma device allocated
+Setting op alloc_pd
+Setting op create_cq
+Setting op create_qp
+Setting op dealloc_pd
+Setting op dereg_mr
+Setting op destroy_cq
+Setting op destroy_qp
+Setting op modify_qp
+Setting op poll_cq
+Setting op post_recv
+Setting op post_send
+Setting op query_device_ex
+Setting op query_port
+Setting op query_qp
+Setting op reg_mr
+bluerdma device allocated
+[2025-11-04T04:49:15.082079513Z DEBUG blue_rdma_driver::verbs::core] before create hardware ctx
+[2025-11-04T04:49:15.082219197Z DEBUG blue_rdma_driver::verbs::core] before load default
+[2025-11-04T04:49:15.082268568Z WARN  blue_rdma_driver::config] can't load config from /etc/bluerdma/config.toml, using default value
+[2025-11-04T04:49:15.082328607Z DEBUG blue_rdma_driver::verbs::core] before open default
+[2025-11-04T04:49:15.082629239Z INFO  bluerdma_rust::rxe::ctx_ops] Querying device attributes
+[2025-11-04T04:49:15.082665223Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+
+[2025-11-04 12:49:15] DESKTOP-M211L3D:14448:14448 [0] transport/net_ib.cc:472 NCCL WARN Could not find real path of bluerdma0 (/sys/class/infiniband/bluerdma0/device)
+DESKTOP-M211L3D:14448:14448 [0] NCCL INFO NET/IB: [0] bluerdma0:uverbs0:1/RoCE provider=None speed=400000 context=0x5d925fceaf70 pciPath=(null) ar=0
+DESKTOP-M211L3D:14448:14448 [0] NCCL INFO NET/IB : Made virtual device [0] name=bluerdma0 speed=400000 ndevs=1
+[2025-11-04T04:49:15.082875087Z DEBUG blue_rdma_driver::verbs::core] before create hardware ctx
+[2025-11-04T04:49:15.082917495Z DEBUG blue_rdma_driver::verbs::core] before load default
+[2025-11-04T04:49:15.082940660Z WARN  blue_rdma_driver::config] can't load config from /etc/bluerdma/config.toml, using default value
+[2025-11-04T04:49:15.082977413Z DEBUG blue_rdma_driver::verbs::core] before open default
+[2025-11-04T04:49:15.083188782Z INFO  bluerdma_rust::rxe::ctx_ops] Querying device attributes
+[2025-11-04T04:49:15.083214567Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+
+[2025-11-04 12:49:15] DESKTOP-M211L3D:14448:14448 [0] transport/net_ib.cc:472 NCCL WARN Could not find real path of bluerdma1 (/sys/class/infiniband/bluerdma1/device)
+DESKTOP-M211L3D:14448:14448 [0] NCCL INFO NET/IB: [1] bluerdma1:uverbs1:1/RoCE provider=None speed=400000 context=0x5d925fcec490 pciPath=(null) ar=0
+DESKTOP-M211L3D:14448:14448 [0] NCCL INFO NET/IB : Made virtual device [1] name=bluerdma1 speed=400000 ndevs=1
+DESKTOP-M211L3D:14448:14448 [0] NCCL INFO NET/IB : Using [0]bluerdma0:1/RoCE [1]bluerdma1:1/RoCE [RO]; OOB eth0:100.82.177.43<0>
+DESKTOP-M211L3D:14448:14448 [0] NCCL INFO Initialized NET plugin IB
+[2025-11-04T04:49:15.083414989Z INFO  bluerdma_rust::rxe::ctx_ops] Allocating protection domain
+[2025-11-04T04:49:15.083465348Z INFO  bluerdma_rust::rxe::ctx_ops] Deallocating protection domain
+DESKTOP-M211L3D:14448:14448 [0] NCCL INFO Assigned NET plugin IB to comm
+DESKTOP-M211L3D:14448:14448 [0] NCCL INFO Using network IB
+DESKTOP-M211L3D:14447:14447 [0] NCCL INFO ncclCommInitRank comm 0x5f88ab7ad7a0 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId 1000 commId 0x17e2d0a6236e4ad8 - Init START
+DESKTOP-M211L3D:14448:14448 [0] NCCL INFO ncclCommInitRank comm 0x5d925c030ef0 rank 1 nranks 2 cudaDev 0 nvmlDev 0 busId 1000 commId 0x17e2d0a6236e4ad8 - Init START
+DESKTOP-M211L3D:14447:14447 [0] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+DESKTOP-M211L3D:14448:14448 [0] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+
+[2025-11-04 12:49:15] DESKTOP-M211L3D:14448:14448 [0] init.cc:737 NCCL WARN Duplicate GPU detected : rank 1 and rank 0 both on CUDA device 1000
+DESKTOP-M211L3D:14448:14448 [0] NCCL INFO init.cc:1449 -> 5
+DESKTOP-M211L3D:14448:14448 [0] NCCL INFO init.cc:1832 -> 5
+
+[2025-11-04 12:49:15] DESKTOP-M211L3D:14447:14447 [0] init.cc:737 NCCL WARN Duplicate GPU detected : rank 0 and rank 1 both on CUDA device 1000
+DESKTOP-M211L3D:14447:14447 [0] NCCL INFO init.cc:1449 -> 5
+DESKTOP-M211L3D:14447:14447 [0] NCCL INFO init.cc:1832 -> 5
+DESKTOP-M211L3D:14447:14447 [0] NCCL INFO init.cc:1858 -> 5
+Failed, NCCL error example.cpp:62 'invalid usage (run with NCCL_DEBUG=WARN for details)'
+DESKTOP-M211L3D:14448:14448 [0] NCCL INFO init.cc:1858 -> 5
+Failed, NCCL error example.cpp:62 'invalid usage (run with NCCL_DEBUG=WARN for details)'
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[58177,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------

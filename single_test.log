@@ -1,0 +1,156 @@
+==========================================
+  Running Single GPU Test
+==========================================
+This test validates:
+  ✓ CUDA runtime
+  ✓ NCCL initialization
+  ✓ Blue RDMA driver loading
+  ✓ Device query operations
+
+Note: No actual network communication (single process)
+
+export LD_LIBRARY_PATH=../blue-rdma-driver/dtld-ibverbs/target/debug:../blue-rdma-driver/dtld-ibverbs/rdma-core-55.0/build/lib:/usr/local/cuda-13.0/lib64:$LD_LIBRARY_PATH && \
+export RUST_LOG=debug && \
+export NCCL_IB_DISABLE=0 && \
+export NCCL_NET=IB && \
+export NCCL_IB_HCA=bluerdma && \
+export NCCL_DEBUG=INFO && \
+export NCCL_DEBUG_SUBSYS=INIT,NET && \
+./single_gpu_test
+=== Single GPU NCCL Test for Blue RDMA Driver ===
+
+✓ NCCL configured to use IB transport with bluerdma device
+✓ Found 1 CUDA device(s)
+✓ Using CUDA device 0
+  Device name: NVIDIA GeForce RTX 4060 Ti
+  Compute capability: 8.9
+  Total global memory: 16.00 GB
+
+--- Testing CUDA Operations ---
+✓ Allocated 4 MB on GPU
+✓ Memory set successful
+✓ Memory copy successful
+✓ Data verification: PASSED
+
+--- Testing NCCL Initialization ---
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Bootstrap : Using eth0:100.82.177.43<0>
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+✓ Generated NCCL unique ID
+
+DESKTOP-M211L3D:38832:38832 [0] misc/cudawrap.cc:179 NCCL WARN Failed to find CUDA library libcuda.so (NCCL_CUDA_PATH='') : libcuda.so: cannot open shared object file: No such file or directory
+NCCL version 2.18.3+cuda12.0
+[2025-11-03T17:30:51.114435308Z DEBUG blue_rdma_driver::verbs::core] before create hardware ctx
+[2025-11-03T17:30:51.114597634Z DEBUG blue_rdma_driver::verbs::core] before load default
+[2025-11-03T17:30:51.114662808Z WARN  blue_rdma_driver::config] can't load config from /etc/bluerdma/config.toml, using default value
+[2025-11-03T17:30:51.114720727Z DEBUG blue_rdma_driver::verbs::core] before open default
+[2025-11-03T17:30:51.115151068Z INFO  bluerdma_rust::rxe::ctx_ops] Querying device attributes
+[2025-11-03T17:30:51.115197526Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+[2025-11-03T17:30:51.115558489Z DEBUG blue_rdma_driver::verbs::core] before create hardware ctx
+[2025-11-03T17:30:51.115616525Z DEBUG blue_rdma_driver::verbs::core] before load default
+[2025-11-03T17:30:51.115644310Z WARN  blue_rdma_driver::config] can't load config from /etc/bluerdma/config.toml, using default value
+[2025-11-03T17:30:51.115678621Z DEBUG blue_rdma_driver::verbs::core] before open default
+[2025-11-03T17:30:51.115925860Z INFO  bluerdma_rust::rxe::ctx_ops] Querying device attributes
+[2025-11-03T17:30:51.115970819Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+[2025-11-03T17:30:51.169626815Z INFO  bluerdma_rust::rxe::ctx_ops] Allocating protection domain
+[2025-11-03T17:30:51.169875245Z INFO  bluerdma_rust::rxe::ctx_ops] Deallocating protection domain
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO NCCL_IB_HCA set to bluerdma
+Setting op alloc_pd
+Setting op create_cq
+Setting op create_qp
+Setting op dealloc_pd
+Setting op dereg_mr
+Setting op destroy_cq
+Setting op destroy_qp
+Setting op modify_qp
+Setting op poll_cq
+Setting op post_recv
+Setting op post_send
+Setting op query_device_ex
+Setting op query_port
+Setting op query_qp
+Setting op reg_mr
+bluerdma device allocated
+Setting op alloc_pd
+Setting op create_cq
+Setting op create_qp
+Setting op dealloc_pd
+Setting op dereg_mr
+Setting op destroy_cq
+Setting op destroy_qp
+Setting op modify_qp
+Setting op poll_cq
+Setting op post_recv
+Setting op post_send
+Setting op query_device_ex
+Setting op query_port
+Setting op query_qp
+Setting op reg_mr
+bluerdma device allocated
+
+DESKTOP-M211L3D:38832:38832 [0] transport/net_ib.cc:109 NCCL WARN Could not find real path of bluerdma0 (/sys/class/infiniband/bluerdma0/device)
+
+DESKTOP-M211L3D:38832:38832 [0] transport/net_ib.cc:109 NCCL WARN Could not find real path of bluerdma1 (/sys/class/infiniband/bluerdma1/device)
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO NET/IB : Using [0]bluerdma0:1/RoCE [1]bluerdma1:1/RoCE [RO]; OOB eth0:100.82.177.43<0>
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Using network IB
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO comm 0x5cbc082046f0 rank 0 nranks 1 cudaDev 0 nvmlDev 0 busId 1000 commId 0x6e83d58a22bee443 - Init START
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'bluerdma0'
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 1 'bluerdma1'
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 00/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 01/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 02/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 03/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 04/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 05/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 06/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 07/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 08/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 09/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 10/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 11/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 12/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 13/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 14/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 15/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 16/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 17/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 18/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 19/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 20/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 21/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 22/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 23/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 24/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 25/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 26/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 27/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 28/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 29/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 30/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Channel 31/32 :    0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Trees [0] -1/-1/-1->0->-1 [1] -1/-1/-1->0->-1 [2] -1/-1/-1->0->-1 [3] -1/-1/-1->0->-1 [4] -1/-1/-1->0->-1 [5] -1/-1/-1->0->-1 [6] -1/-1/-1->0->-1 [7] -1/-1/-1->0->-1 [8] -1/-1/-1->0->-1 [9] -1/-1/-1->0->-1 [10] -1/-1/-1->0->-1 [11] -1/-1/-1->0->-1 [12] -1/-1/-1->0->-1 [13] -1/-1/-1->0->-1 [14] -1/-1/-1->0->-1 [15] -1/-1/-1->0->-1 [16] -1/-1/-1->0->-1 [17] -1/-1/-1->0->-1 [18] -1/-1/-1->0->-1 [19] -1/-1/-1->0->-1 [20] -1/-1/-1->0->-1 [21] -1/-1/-1->0->-1 [22] -1/-1/-1->0->-1 [23] -1/-1/-1->0->-1 [24] -1/-1/-1->0->-1 [25] -1/-1/-1->0->-1 [26] -1/-1/-1->0->-1 [27] -1/-1/-1->0->-1 [28] -1/-1/-1->0->-1 [29] -1/-1/-1->0->-1 [30] -1/-1/-1->0->-1 [31] -1/-1/-1->0->-1
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO P2P Chunksize set to 131072
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Connected all rings
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Connected all trees
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO 32 coll channels, 0 nvls channels, 32 p2p channels, 32 p2p channels per peer
+DESKTOP-M211L3D:38832:38845 [0] NCCL INFO New proxy send connection 0 from local rank 0, transport 2
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7705ac000db0
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO comm 0x5cbc082046f0 rank 0 nranks 1 cudaDev 0 nvmlDev 0 busId 1000 commId 0x6e83d58a22bee443 - Init COMPLETE
+✓ NCCL communicator initialized (single rank mode)
+✓ Allocated buffers for NCCL operations
+✓ NCCL AllReduce operation posted
+✓ NCCL AllReduce completed
+✓ NCCL AllReduce result verification: PASSED
+
+--- Cleanup ---
+DESKTOP-M211L3D:38832:38832 [0] NCCL INFO comm 0x5cbc082046f0 rank 0 nranks 1 cudaDev 0 busId 1000 - Destroy COMPLETE
+✓ All resources cleaned up
+
+=== TEST COMPLETED SUCCESSFULLY ===
+
+Key findings:
+  • CUDA runtime: Working
+  • GPU memory operations: Working
+  • NCCL initialization: Working
+  • NCCL IB transport: Detected (check logs above)
+  • Blue RDMA driver: Loaded (check 'Setting op' messages above)

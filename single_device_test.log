@@ -1,0 +1,85 @@
+[Rank 0/1] Process started (PID: 73544)
+[Rank 0] NCCL configured to use IB transport with bluerdma device
+DESKTOP-M211L3D:73544:73544 [0] NCCL INFO ENV/Plugin: Could not find: libnccl-env.so
+[Rank 0] Generated NCCL unique ID
+DESKTOP-M211L3D:73544:73544 [0] NCCL INFO cudaDriverVersion 13000
+DESKTOP-M211L3D:73544:73544 [0] NCCL INFO NCCL version 2.28.7+cuda13.0
+DESKTOP-M211L3D:73544:73544 [0] NCCL INFO NET/Plugin: Could not find: libnccl-net.so
+DESKTOP-M211L3D:73544:73544 [0] NCCL INFO NCCL_IB_HCA set to bluerdma
+Setting op alloc_pd
+Setting op create_cq
+Setting op create_qp
+Setting op dealloc_pd
+Setting op dereg_mr
+Setting op destroy_cq
+Setting op destroy_qp
+Setting op modify_qp
+Setting op poll_cq
+Setting op post_recv
+Setting op post_send
+Setting op query_device_ex
+Setting op query_port
+Setting op query_qp
+Setting op reg_mr
+bluerdma device allocated
+Setting op alloc_pd
+Setting op create_cq
+Setting op create_qp
+Setting op dealloc_pd
+Setting op dereg_mr
+Setting op destroy_cq
+Setting op destroy_qp
+Setting op modify_qp
+Setting op poll_cq
+Setting op post_recv
+Setting op post_send
+Setting op query_device_ex
+Setting op query_port
+Setting op query_qp
+Setting op reg_mr
+bluerdma device allocated
+[2025-11-03T18:12:19.004333486Z DEBUG blue_rdma_driver::verbs::core] before create hardware ctx
+[2025-11-03T18:12:19.004635267Z DEBUG blue_rdma_driver::verbs::core] before load default
+[2025-11-03T18:12:19.004692119Z WARN  blue_rdma_driver::config] can't load config from /etc/bluerdma/config.toml, using default value
+[2025-11-03T18:12:19.004736186Z DEBUG blue_rdma_driver::verbs::core] before open default
+[2025-11-03T18:12:19.005058806Z INFO  bluerdma_rust::rxe::ctx_ops] Querying device attributes
+[2025-11-03T18:12:19.005101832Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+
+[2025-11-04 02:12:19] DESKTOP-M211L3D:73544:73544 [0] transport/net_ib.cc:526 NCCL WARN Could not find real path of bluerdma0 (/sys/class/infiniband/bluerdma0/device)
+DESKTOP-M211L3D:73544:73544 [0] NCCL INFO NET/IB: [0] bluerdma0:uverbs0:1/RoCE provider=None speed=400000 context=0x5dab8750ca50 pciPath=(null) ar=0
+DESKTOP-M211L3D:73544:73544 [0] NCCL INFO NET/IB : Made virtual device [0] name=bluerdma0 speed=400000 ndevs=1
+[2025-11-03T18:12:19.005539784Z DEBUG blue_rdma_driver::verbs::core] before create hardware ctx
+[2025-11-03T18:12:19.005579279Z DEBUG blue_rdma_driver::verbs::core] before load default
+[2025-11-03T18:12:19.005609674Z WARN  blue_rdma_driver::config] can't load config from /etc/bluerdma/config.toml, using default value
+[2025-11-03T18:12:19.005639931Z DEBUG blue_rdma_driver::verbs::core] before open default
+[2025-11-03T18:12:19.005945401Z INFO  bluerdma_rust::rxe::ctx_ops] Querying device attributes
+[2025-11-03T18:12:19.005986736Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+
+[2025-11-04 02:12:19] DESKTOP-M211L3D:73544:73544 [0] transport/net_ib.cc:526 NCCL WARN Could not find real path of bluerdma1 (/sys/class/infiniband/bluerdma1/device)
+DESKTOP-M211L3D:73544:73544 [0] NCCL INFO NET/IB: [1] bluerdma1:uverbs1:1/RoCE provider=None speed=400000 context=0x5dab87515500 pciPath=(null) ar=0
+[DESKTOP-M211L3D:73544] *** Process received signal ***
+[DESKTOP-M211L3D:73544] Signal: Segmentation fault (11)
+[DESKTOP-M211L3D:73544] Signal code: Address not mapped (1)
+[DESKTOP-M211L3D:73544] Failing at address: 0x7
+[DESKTOP-M211L3D:73544] [ 0] /lib/x86_64-linux-gnu/libc.so.6(+0x45330)[0x781dcfe45330]
+[DESKTOP-M211L3D:73544] [ 1] /lib/x86_64-linux-gnu/libnccl.so.2(+0x14e63f)[0x781dd074e63f]
+[DESKTOP-M211L3D:73544] [ 2] /lib/x86_64-linux-gnu/libnccl.so.2(+0x85f89)[0x781dd0685f89]
+[DESKTOP-M211L3D:73544] [ 3] /lib/x86_64-linux-gnu/libnccl.so.2(+0x9d7e5)[0x781dd069d7e5]
+[DESKTOP-M211L3D:73544] [ 4] /lib/x86_64-linux-gnu/libnccl.so.2(+0x7f691)[0x781dd067f691]
+[DESKTOP-M211L3D:73544] [ 5] /lib/x86_64-linux-gnu/libnccl.so.2(+0x8e6e7)[0x781dd068e6e7]
+[DESKTOP-M211L3D:73544] [ 6] /lib/x86_64-linux-gnu/libnccl.so.2(pncclCommInitRank+0x1e2)[0x781dd068ffb2]
+[DESKTOP-M211L3D:73544] [ 7] ./nccl_test(+0x98f3)[0x5dab6fda08f3]
+[DESKTOP-M211L3D:73544] [ 8] /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca)[0x781dcfe2a1ca]
+[DESKTOP-M211L3D:73544] [ 9] /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b)[0x781dcfe2a28b]
+[DESKTOP-M211L3D:73544] [10] ./nccl_test(+0x9d35)[0x5dab6fda0d35]
+[DESKTOP-M211L3D:73544] *** End of error message ***
+DESKTOP-M211L3D:73544:73544 [0] NCCL INFO NET/IB : Made virtual device [1] name=bluerdma1 speed=400000 ndevs=1
+DESKTOP-M211L3D:73544:73544 [0] NCCL INFO NET/IB : Using [0]bluerdma0:1/RoCE [1]bluerdma1:1/RoCE [RO]; OOB eth0:100.82.177.43<0>
+DESKTOP-M211L3D:73544:73544 [0] NCCL INFO Initialized NET plugin IB
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 0 on node DESKTOP-M211L3D exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------

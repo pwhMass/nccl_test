@@ -1,0 +1,65 @@
+
+This GDB supports auto-downloading debuginfo from the following URLs:
+  <https://debuginfod.ubuntu.com>
+Debuginfod has been disabled.
+To make this setting permanent, add 'set debuginfod enabled off' to .gdbinit.
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+warning: could not find '.gnu_debugaltlink' file for /lib/x86_64-linux-gnu/libcap.so.2
+[Detaching after fork from child process 71703]
+[New Thread 0x7fffebd4b000 (LWP 71706)]
+warning: could not find '.gnu_debugaltlink' file for /usr/lib/x86_64-linux-gnu/pmix2/lib/pmix/pmix_mca_pcompress_zlib.so
+[New Thread 0x7fffeb1ff000 (LWP 71707)]
+warning: could not find '.gnu_debugaltlink' file for /usr/lib/x86_64-linux-gnu/hwloc/hwloc_xml_libxml.so
+warning: could not find '.gnu_debugaltlink' file for /usr/lib/x86_64-linux-gnu/hwloc/hwloc_gl.so
+warning: could not find '.gnu_debugaltlink' file for /usr/lib/x86_64-linux-gnu/hwloc/hwloc_pci.so
+warning: could not find '.gnu_debugaltlink' file for /usr/lib/x86_64-linux-gnu/hwloc/hwloc_opencl.so
+[New Thread 0x7fffe1dff000 (LWP 71727)]
+[New Thread 0x7fffe11ff000 (LWP 71728)]
+[Thread 0x7fffe11ff000 (LWP 71728) exited]
+[New Thread 0x7fffe11ff000 (LWP 71729)]
+[New Thread 0x7fffd1fff000 (LWP 71730)]
+[2025-11-03T18:10:04.707323483Z DEBUG blue_rdma_driver::verbs::core] before create hardware ctx
+[2025-11-03T18:10:04.708167054Z DEBUG blue_rdma_driver::verbs::core] before load default
+[2025-11-03T18:10:04.708215186Z WARN  blue_rdma_driver::config] can't load config from /etc/bluerdma/config.toml, using default value
+[2025-11-03T18:10:04.708960837Z DEBUG blue_rdma_driver::verbs::core] before open default
+[2025-11-03T18:10:04.712725511Z INFO  bluerdma_rust::rxe::ctx_ops] Querying device attributes
+[2025-11-03T18:10:04.712803311Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+[New Thread 0x7fffc09ff000 (LWP 71732)]
+[2025-11-03T18:10:04.713811243Z DEBUG blue_rdma_driver::verbs::core] before create hardware ctx
+[2025-11-03T18:10:04.713918031Z DEBUG blue_rdma_driver::verbs::core] before load default
+[2025-11-03T18:10:04.713962278Z WARN  blue_rdma_driver::config] can't load config from /etc/bluerdma/config.toml, using default value
+[2025-11-03T18:10:04.714004825Z DEBUG blue_rdma_driver::verbs::core] before open default
+[2025-11-03T18:10:04.714323309Z INFO  bluerdma_rust::rxe::ctx_ops] Querying device attributes
+[2025-11-03T18:10:04.714387342Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+[New Thread 0x7fffc01fe000 (LWP 71733)]
+[DESKTOP-M211L3D:71675] *** Process received signal ***
+[DESKTOP-M211L3D:71675] Signal: Segmentation fault (11)
+[DESKTOP-M211L3D:71675] Signal code: Address not mapped (1)
+[DESKTOP-M211L3D:71675] Failing at address: 0x7
+[DESKTOP-M211L3D:71675] [ 0] /lib/x86_64-linux-gnu/libc.so.6(+0x45330)[0x7fffebe45330]
+[DESKTOP-M211L3D:71675] [ 1] /lib/x86_64-linux-gnu/libnccl.so.2(+0x14e63f)[0x7fffec74e63f]
+[DESKTOP-M211L3D:71675] [ 2] /lib/x86_64-linux-gnu/libnccl.so.2(+0x85f89)[0x7fffec685f89]
+[DESKTOP-M211L3D:71675] [ 3] /lib/x86_64-linux-gnu/libnccl.so.2(+0x9d7e5)[0x7fffec69d7e5]
+[DESKTOP-M211L3D:71675] [ 4] /lib/x86_64-linux-gnu/libnccl.so.2(+0x7f691)[0x7fffec67f691]
+[DESKTOP-M211L3D:71675] [ 5] /lib/x86_64-linux-gnu/libnccl.so.2(+0x8e6e7)[0x7fffec68e6e7]
+[DESKTOP-M211L3D:71675] [ 6] /lib/x86_64-linux-gnu/libnccl.so.2(pncclCommInitRank+0x1e2)[0x7fffec68ffb2]
+[DESKTOP-M211L3D:71675] [ 7] /home/peng/projects/rdma_all/nccl_test/nccl_test(+0x12d38)[0x555555566d38]
+[DESKTOP-M211L3D:71675] [ 8] /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca)[0x7fffebe2a1ca]
+[DESKTOP-M211L3D:71675] [ 9] /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b)[0x7fffebe2a28b]
+[DESKTOP-M211L3D:71675] [10] /home/peng/projects/rdma_all/nccl_test/nccl_test(+0x9745)[0x55555555d745]
+[DESKTOP-M211L3D:71675] *** End of error message ***
+[Thread 0x7fffc01fe000 (LWP 71733) exited]
+[Thread 0x7fffc09ff000 (LWP 71732) exited]
+[Thread 0x7fffd1fff000 (LWP 71730) exited]
+[Thread 0x7fffe11ff000 (LWP 71729) exited]
+[Thread 0x7fffe1dff000 (LWP 71727) exited]
+[Thread 0x7fffeb1ff000 (LWP 71707) exited]
+[Thread 0x7ffff7ec1000 (LWP 71675) exited]
+[Thread 0x7fffebd4b000 (LWP 71706) exited]
+[New process 71675]
+
+Program terminated with signal SIGSEGV, Segmentation fault.
+The program no longer exists.
+gdb_script.txt:6: Error in sourced command file:
+No stack.
