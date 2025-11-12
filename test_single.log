@@ -1,10 +1,10 @@
-[Rank 0/1] Process started (PID: 14401)
+[Rank 0/1] Process started (PID: 47100)
 [Rank 0] NCCL configured to use IB transport with bluerdma device
 [Rank 0] Generated NCCL unique ID
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO cudaDriverVersion 13000
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO NCCL version 2.27.7+cuda13.0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. 
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO NCCL_IB_HCA set to bluerdma
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO cudaDriverVersion 13000
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO NCCL version 2.27.7+cuda13.0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. 
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO NCCL_IB_HCA set to bluerdma
 Setting op alloc_pd
 Setting op create_cq
 Setting op create_qp
@@ -37,122 +37,122 @@ Setting op query_port
 Setting op query_qp
 Setting op reg_mr
 bluerdma device allocated
-[2025-11-04T04:49:13.393503527Z DEBUG blue_rdma_driver::verbs::core] before create hardware ctx
-[2025-11-04T04:49:13.394208131Z DEBUG blue_rdma_driver::verbs::core] before load default
-[2025-11-04T04:49:13.394249076Z WARN  blue_rdma_driver::config] can't load config from /etc/bluerdma/config.toml, using default value
-[2025-11-04T04:49:13.394948607Z DEBUG blue_rdma_driver::verbs::core] before open default
-[2025-11-04T04:49:13.398250958Z INFO  bluerdma_rust::rxe::ctx_ops] Querying device attributes
-[2025-11-04T04:49:13.398292844Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+[2025-11-04T06:03:24.306704800Z DEBUG blue_rdma_driver::verbs::core] before create hardware ctx
+[2025-11-04T06:03:24.308010410Z DEBUG blue_rdma_driver::verbs::core] before load default
+[2025-11-04T06:03:24.308093600Z WARN  blue_rdma_driver::config] can't load config from /etc/bluerdma/config.toml, using default value
+[2025-11-04T06:03:24.309508175Z DEBUG blue_rdma_driver::verbs::core] before open default
+[2025-11-04T06:03:24.316529286Z INFO  bluerdma_rust::rxe::ctx_ops] Querying device attributes
+[2025-11-04T06:03:24.316647463Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
 
-[2025-11-04 12:49:13] DESKTOP-M211L3D:14401:14401 [0] transport/net_ib.cc:472 NCCL WARN Could not find real path of bluerdma0 (/sys/class/infiniband/bluerdma0/device)
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO NET/IB: [0] bluerdma0:uverbs0:1/RoCE provider=None speed=400000 context=0x5e0a2a633ea0 pciPath=(null) ar=0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO NET/IB : Made virtual device [0] name=bluerdma0 speed=400000 ndevs=1
-[2025-11-04T04:49:13.398525996Z DEBUG blue_rdma_driver::verbs::core] before create hardware ctx
-[2025-11-04T04:49:13.398578539Z DEBUG blue_rdma_driver::verbs::core] before load default
-[2025-11-04T04:49:13.398606758Z WARN  blue_rdma_driver::config] can't load config from /etc/bluerdma/config.toml, using default value
-[2025-11-04T04:49:13.398638306Z DEBUG blue_rdma_driver::verbs::core] before open default
-[2025-11-04T04:49:13.398860071Z INFO  bluerdma_rust::rxe::ctx_ops] Querying device attributes
-[2025-11-04T04:49:13.398907838Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+[2025-11-04 14:03:24] DESKTOP-M211L3D:47100:47100 [0] transport/net_ib.cc:472 NCCL WARN Could not find real path of bluerdma0 (/sys/class/infiniband/bluerdma0/device)
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO NET/IB: [0] bluerdma0:uverbs0:1/RoCE provider=None speed=400000 context=0x5aaee49518b0 pciPath=(null) ar=0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO NET/IB : Made virtual device [0] name=bluerdma0 speed=400000 ndevs=1
+[2025-11-04T06:03:24.317477652Z DEBUG blue_rdma_driver::verbs::core] before create hardware ctx
+[2025-11-04T06:03:24.317580260Z DEBUG blue_rdma_driver::verbs::core] before load default
+[2025-11-04T06:03:24.317633803Z WARN  blue_rdma_driver::config] can't load config from /etc/bluerdma/config.toml, using default value
+[2025-11-04T06:03:24.317682865Z DEBUG blue_rdma_driver::verbs::core] before open default
+[2025-11-04T06:03:24.318377204Z INFO  bluerdma_rust::rxe::ctx_ops] Querying device attributes
+[2025-11-04T06:03:24.318440047Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
 
-[2025-11-04 12:49:13] DESKTOP-M211L3D:14401:14401 [0] transport/net_ib.cc:472 NCCL WARN Could not find real path of bluerdma1 (/sys/class/infiniband/bluerdma1/device)
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO NET/IB: [1] bluerdma1:uverbs1:1/RoCE provider=None speed=400000 context=0x5e0a2a643c90 pciPath=(null) ar=0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO NET/IB : Made virtual device [1] name=bluerdma1 speed=400000 ndevs=1
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO NET/IB : Using [0]bluerdma0:1/RoCE [1]bluerdma1:1/RoCE [RO]; OOB eth0:100.82.177.43<0>
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Initialized NET plugin IB
-[2025-11-04T04:49:13.399109317Z INFO  bluerdma_rust::rxe::ctx_ops] Allocating protection domain
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Assigned NET plugin IB to comm
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Using network IB
-[2025-11-04T04:49:13.399153757Z INFO  bluerdma_rust::rxe::ctx_ops] Deallocating protection domain
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO ncclCommInitRank comm 0x5e0a2697c400 rank 0 nranks 1 cudaDev 0 nvmlDev 0 busId 1000 commId 0x400abd331b14bf48 - Init START
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'bluerdma0'
-[2025-11-04T04:49:13.503203681Z INFO  bluerdma_rust::rxe::ctx_ops] Allocating protection domain
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 1 'bluerdma1'
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO NET/IB : Made virtual device [2] name=bluerdma0+bluerdma1 speed=800000 ndevs=2
-[2025-11-04T04:49:13.503280357Z INFO  bluerdma_rust::rxe::ctx_ops] Deallocating protection domain
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 2 'bluerdma0+bluerdma1'
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO comm 0x5e0a2697c400 rank 0 nRanks 1 nNodes 1 localRanks 1 localRank 0 MNNVL 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 00/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 01/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 02/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 03/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 04/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 05/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 06/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 07/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 08/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 09/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 10/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 11/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 12/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 13/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 14/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 15/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 16/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 17/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 18/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 19/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 20/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 21/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 22/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 23/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 24/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 25/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 26/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 27/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 28/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 29/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 30/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 31/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 32/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 33/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 34/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 35/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 36/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 37/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 38/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 39/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 40/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 41/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 42/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 43/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 44/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 45/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 46/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 47/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 48/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 49/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 50/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 51/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 52/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 53/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 54/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 55/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 56/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 57/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 58/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 59/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 60/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 61/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 62/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Channel 63/64 : 0
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Trees [0] -1/-1/-1->0->-1 [1] -1/-1/-1->0->-1 [2] -1/-1/-1->0->-1 [3] -1/-1/-1->0->-1 [4] -1/-1/-1->0->-1 [5] -1/-1/-1->0->-1 [6] -1/-1/-1->0->-1 [7] -1/-1/-1->0->-1 [8] -1/-1/-1->0->-1 [9] -1/-1/-1->0->-1 [10] -1/-1/-1->0->-1 [11] -1/-1/-1->0->-1 [12] -1/-1/-1->0->-1 [13] -1/-1/-1->0->-1 [14] -1/-1/-1->0->-1 [15] -1/-1/-1->0->-1 [16] -1/-1/-1->0->-1 [17] -1/-1/-1->0->-1 [18] -1/-1/-1->0->-1 [19] -1/-1/-1->0->-1 [20] -1/-1/-1->0->-1 [21] -1/-1/-1->0->-1 [22] -1/-1/-1->0->-1 [23] -1/-1/-1->0->-1 [24] -1/-1/-1->0->-1 [25] -1/-1/-1->0->-1 [26] -1/-1/-1->0->-1 [27] -1/-1/-1->0->-1 [28] -1/-1/-1->0->-1 [29] -1/-1/-1->0->-1 [30] -1/-1/-1->0->-1 [31] -1/-1/-1->0->-1 [32] -1/-1/-1->0->-1 [33] -1/-1/-1->0->-1 [34] -1/-1/-1->0->-1 [35] -1/-1/-1->0->-1 [36] -1/-1/-1->0->-1 [37] -1/-1/-1->0->-1 [38] -1/-1/-1->0->-1 [39] -1/-1/-1->0->-1 [40] -1/-1/-1->0->-1 [41] -1/-1/-1->0->-1 [42] -1/-1/-1->0->-1 [43] -1/-1/-1->0->-1 [44] -1/-1/-1->0->-1 [45] -1/-1/-1->0->-1 [46] -1/-1/-1->0->-
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO P2P Chunksize set to 524288
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Check P2P Type isAllDirectP2p 0 directMode 0
-DESKTOP-M211L3D:14401:14439 [0] NCCL INFO [Proxy Service] Device 0 CPU core 0
-DESKTOP-M211L3D:14401:14440 [0] NCCL INFO [Proxy Service UDS] Device 0 CPU core 1
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO 64 coll channels, 64 collnet channels, 0 nvls channels, 64 p2p channels, 64 p2p channels per peer
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO CC Off, workFifoBytes 1048576
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO ncclCommInitRank comm 0x5e0a2697c400 rank 0 nranks 1 cudaDev 0 nvmlDev 0 busId 1000 commId 0x400abd331b14bf48 - Init COMPLETE
-DESKTOP-M211L3D:14401:14401 [0] NCCL INFO Init timings - ncclCommInitRank: rank 0 nranks 1 total 0.55 (kernels 0.25, alloc 0.10, bootstrap 0.06, allgathers 0.00, topo 0.01, graphs 0.00, connections 0.12, rest 0.00)
+[2025-11-04 14:03:24] DESKTOP-M211L3D:47100:47100 [0] transport/net_ib.cc:472 NCCL WARN Could not find real path of bluerdma1 (/sys/class/infiniband/bluerdma1/device)
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO NET/IB: [1] bluerdma1:uverbs1:1/RoCE provider=None speed=400000 context=0x5aaee4962d40 pciPath=(null) ar=0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO NET/IB : Made virtual device [1] name=bluerdma1 speed=400000 ndevs=1
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO NET/IB : Using [0]bluerdma0:1/RoCE [1]bluerdma1:1/RoCE [RO]; OOB eth0:100.82.177.43<0>
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Initialized NET plugin IB
+[2025-11-04T06:03:24.318790503Z INFO  bluerdma_rust::rxe::ctx_ops] Allocating protection domain
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Assigned NET plugin IB to comm
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Using network IB
+[2025-11-04T06:03:24.318850320Z INFO  bluerdma_rust::rxe::ctx_ops] Deallocating protection domain
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO ncclCommInitRank comm 0x5aaee0c93070 rank 0 nranks 1 cudaDev 0 nvmlDev 0 busId 1000 commId 0x6667ec6791b88af9 - Init START
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+[2025-11-04T06:03:24.555176789Z INFO  bluerdma_rust::rxe::ctx_ops] Allocating protection domain
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'bluerdma0'
+[2025-11-04T06:03:24.555239750Z INFO  bluerdma_rust::rxe::ctx_ops] Deallocating protection domain
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 1 'bluerdma1'
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO NET/IB : Made virtual device [2] name=bluerdma0+bluerdma1 speed=800000 ndevs=2
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 2 'bluerdma0+bluerdma1'
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO comm 0x5aaee0c93070 rank 0 nRanks 1 nNodes 1 localRanks 1 localRank 0 MNNVL 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 00/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 01/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 02/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 03/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 04/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 05/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 06/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 07/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 08/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 09/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 10/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 11/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 12/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 13/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 14/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 15/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 16/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 17/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 18/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 19/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 20/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 21/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 22/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 23/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 24/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 25/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 26/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 27/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 28/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 29/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 30/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 31/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 32/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 33/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 34/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 35/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 36/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 37/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 38/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 39/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 40/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 41/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 42/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 43/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 44/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 45/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 46/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 47/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 48/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 49/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 50/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 51/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 52/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 53/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 54/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 55/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 56/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 57/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 58/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 59/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 60/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 61/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 62/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Channel 63/64 : 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Trees [0] -1/-1/-1->0->-1 [1] -1/-1/-1->0->-1 [2] -1/-1/-1->0->-1 [3] -1/-1/-1->0->-1 [4] -1/-1/-1->0->-1 [5] -1/-1/-1->0->-1 [6] -1/-1/-1->0->-1 [7] -1/-1/-1->0->-1 [8] -1/-1/-1->0->-1 [9] -1/-1/-1->0->-1 [10] -1/-1/-1->0->-1 [11] -1/-1/-1->0->-1 [12] -1/-1/-1->0->-1 [13] -1/-1/-1->0->-1 [14] -1/-1/-1->0->-1 [15] -1/-1/-1->0->-1 [16] -1/-1/-1->0->-1 [17] -1/-1/-1->0->-1 [18] -1/-1/-1->0->-1 [19] -1/-1/-1->0->-1 [20] -1/-1/-1->0->-1 [21] -1/-1/-1->0->-1 [22] -1/-1/-1->0->-1 [23] -1/-1/-1->0->-1 [24] -1/-1/-1->0->-1 [25] -1/-1/-1->0->-1 [26] -1/-1/-1->0->-1 [27] -1/-1/-1->0->-1 [28] -1/-1/-1->0->-1 [29] -1/-1/-1->0->-1 [30] -1/-1/-1->0->-1 [31] -1/-1/-1->0->-1 [32] -1/-1/-1->0->-1 [33] -1/-1/-1->0->-1 [34] -1/-1/-1->0->-1 [35] -1/-1/-1->0->-1 [36] -1/-1/-1->0->-1 [37] -1/-1/-1->0->-1 [38] -1/-1/-1->0->-1 [39] -1/-1/-1->0->-1 [40] -1/-1/-1->0->-1 [41] -1/-1/-1->0->-1 [42] -1/-1/-1->0->-1 [43] -1/-1/-1->0->-1 [44] -1/-1/-1->0->-1 [45] -1/-1/-1->0->-1 [46] -1/-1/-1->0->-
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO P2P Chunksize set to 524288
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Check P2P Type isAllDirectP2p 0 directMode 0
+DESKTOP-M211L3D:47100:47160 [0] NCCL INFO [Proxy Service UDS] Device 0 CPU core 1
+DESKTOP-M211L3D:47100:47159 [0] NCCL INFO [Proxy Service] Device 0 CPU core 0
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO 64 coll channels, 64 collnet channels, 0 nvls channels, 64 p2p channels, 64 p2p channels per peer
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO CC Off, workFifoBytes 1048576
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO ncclCommInitRank comm 0x5aaee0c93070 rank 0 nranks 1 cudaDev 0 nvmlDev 0 busId 1000 commId 0x6667ec6791b88af9 - Init COMPLETE
+DESKTOP-M211L3D:47100:47100 [0] NCCL INFO Init timings - ncclCommInitRank: rank 0 nranks 1 total 1.63 (kernels 1.08, alloc 0.26, bootstrap 0.05, allgathers 0.00, topo 0.03, graphs 0.00, connections 0.20, rest 0.00)
 [Rank 0] NCCL communicator initialized
 [Rank 0] GPU memory allocated (4096 bytes)
 [Rank 0] Send buffer initialized with value 1.0
 [Rank 0] Starting ncclAllReduce...
 [Rank 0] ncclAllReduce completed
 [Rank 0] ✓ Test PASSED: result[0] = 1.0 (expected 1.0)
-DESKTOP-M211L3D:14401:14441 [0] NCCL INFO comm 0x5e0a2697c400 rank 0 nranks 1 cudaDev 0 busId 1000 - Destroy COMPLETE
+DESKTOP-M211L3D:47100:47195 [0] NCCL INFO comm 0x5aaee0c93070 rank 0 nranks 1 cudaDev 0 busId 1000 - Destroy COMPLETE
 [Rank 0] Cleanup completed
 [Rank 0] Test finished successfully

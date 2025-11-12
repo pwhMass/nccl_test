@@ -689,9 +689,9 @@ DESKTOP-M211L3D:62764:62764 [0] NCCL INFO NET/IB : Made virtual device [0] name=
 [2025-11-03T17:57:24.094041749Z INFO  bluerdma_rust::rxe::ctx_ops] Querying device attributes
 [2025-11-03T17:57:24.094073524Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
 
-[2025-11-04 01:57:24] DESKTOP-M211L3D:62764:62764 [0] transport/net_ib.cc:526 NCCL WARN Could not find real path of bluerdma1 (/sys/class/infiniband/bluerdma1/device)
+[2025-11-04 01:57:24] DESKTOP-M211L3D:62764:62764 [0] transport/Made virtual devicenet_ib.cc:526 NCCL WARN Could not find real path of bluerdma1 (/sys/class/infiniband/bluerdma1/device)
 DESKTOP-M211L3D:62764:62764 [0] NCCL INFO NET/IB: [1] bluerdma1:uverbs1:1/RoCE provider=None speed=400000 context=0x592d08216950 pciPath=(null) ar=0
-DESKTOP-M211L3D:62764:62764 [0] NCCL INFO NET/IB : Made virtual device [1] name=bluerdma1 speed=400000 ndevs=1
+DESKTOP-M211L3D:62764:62764 [0] NCCL INFO NET/IB :  [1] name=bluerdma1 speed=400000 ndevs=1
 DESKTOP-M211L3D:62764:62764 [0] NCCL INFO NET/IB : Using [0]bluerdma0:1/RoCE [1]bluerdma1:1/RoCE [RO]; OOB eth0:100.82.177.43<0>
 DESKTOP-M211L3D:62764:62764 [0] NCCL INFO Initialized NET plugin IB
 [DESKTOP-M211L3D:62764] *** Process received signal ***
@@ -715,3 +715,7 @@ Primary job  terminated normally, but 1 process returned
 a non-zero exit code. Per user-direction, the job has been aborted.
 --------------------------------------------------------------------------
 ^C^Cmake: *** [Makefile:141: run] Interrupt
+
+
+  sudo apt install libnccl2=2.27.7-1+cuda13.0 libnccl-dev=2.27.7-1+cuda13.0 
+
