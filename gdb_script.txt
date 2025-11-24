@@ -1,6 +1,0 @@
-set pagination off
-set confirm off
-run
-bt
-info proc mappings
-quit

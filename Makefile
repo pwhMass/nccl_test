@@ -1,279 +1,388 @@
-# NCCL Test Makefile for Blue RDMA Driver (Mock Mode)
+# RCCL Test Makefile for ROCm and Blue RDMA
 
 # Compiler settings
 CXX = mpicxx
-NVCC = nvcc
+HIPCC = hipcc
 
-# Auto-detect CUDA installation
-ifeq ($(CUDA_HOME),)
-    ifneq ($(wildcard /usr/local/cuda-13.0),)
-        CUDA_HOME := /usr/local/cuda-13.0
-    else ifneq ($(wildcard /usr/local/cuda),)
-        CUDA_HOME := /usr/local/cuda
-    else ifneq ($(wildcard /usr/local/cuda-12.0),)
-        CUDA_HOME := /usr/local/cuda-12.0
-    else
-        $(error CUDA not found. Please install CUDA or set CUDA_HOME)
-    endif
-endif
+# ROCm paths
+ROCM_HOME ?= /opt/rocm
+DTK_HOME ?= /opt/dtk
 
-# Auto-detect NCCL installation (system-wide or custom)
-ifeq ($(NCCL_HOME),)
-    ifneq ($(wildcard /usr/include/nccl.h),)
-        # NCCL installed system-wide via apt
-        NCCL_INCLUDE := /usr/include
-        NCCL_LIB := /usr/lib/x86_64-linux-gnu
-    else ifneq ($(wildcard /usr/local/nccl),)
-        NCCL_HOME := /usr/local/nccl
-        NCCL_INCLUDE := $(NCCL_HOME)/include
-        NCCL_LIB := $(NCCL_HOME)/lib
-    else
-        $(warning NCCL not found. Please install NCCL.)
-    endif
-else
-    NCCL_INCLUDE := $(NCCL_HOME)/include
-    NCCL_LIB := $(NCCL_HOME)/lib
-endif
+# RCCL paths
+RCCL_INCLUDE ?= $(DTK_HOME)/include
+RCCL_LIB ?= $(DTK_HOME)/lib
 
-# MPI paths (OpenMPI on Ubuntu)
-MPI_HOME ?= /usr/lib/x86_64-linux-gnu/openmpi
-
-# Blue RDMA driver paths
-BLUE_RDMA_ROOT = ../blue-rdma-driver
-BLUE_RDMA_IBVERBS = $(BLUE_RDMA_ROOT)/dtld-ibverbs
-RDMA_CORE_BUILD = $(BLUE_RDMA_IBVERBS)/rdma-core-55.0/build
+# MPI paths
+MPI_HOME = /usr/mpi/gcc/openmpi-4.1.7rc1
+MPI_INCLUDE = $(MPI_HOME)/include
+MPI_LIB = $(MPI_HOME)/lib
 
 # Compiler flags
 CXXFLAGS = -std=c++11 -O2
-NVCCFLAGS = -std=c++11 -O2
+HIPCCFLAGS = -std=c++11 -O2
 
 # Include paths
-INCLUDES = -I$(CUDA_HOME)/include \
-           -I$(RDMA_CORE_BUILD)/include
-
-# Add NCCL include if available
-ifdef NCCL_INCLUDE
-    INCLUDES += -I$(NCCL_INCLUDE)
-endif
-
-# MPI includes are handled by mpicxx
+INCLUDES = -I$(RCCL_INCLUDE) \
+           -I$(MPI_INCLUDE) \
+           -I$(ROCM_HOME)/include
 
 # Library paths
-LDFLAGS = -L$(CUDA_HOME)/lib64 \
-          -L$(RDMA_CORE_BUILD)/lib \
-          -L$(BLUE_RDMA_IBVERBS)/target/debug
-
-# Add NCCL lib path if available
-ifdef NCCL_LIB
-    LDFLAGS += -L$(NCCL_LIB)
-endif
+LDFLAGS = -L$(RCCL_LIB) \
+          -L$(MPI_LIB) \
+          -L$(ROCM_HOME)/lib
 
 # Libraries to link
-LIBS = -lcudart -lnccl -lmpi -libverbs -lpthread -ldl
+LIBS = -lrccl -lmpi
 
 # Targets
-TARGET = nccl_test
-SINGLE_GPU_TARGET = single_gpu_test
-TWO_PROCESS_TARGET = two_process_test
-SOURCES = example.cpp
-SINGLE_GPU_SOURCES = single_gpu_test.cpp
-TWO_PROCESS_SOURCES = two_process_test.cpp
+TARGET = test
+SOURCES = simple_test.cpp
+NORMAL_TARGET = normal_test
+NORMAL_SOURCES = normal_test.cpp
+NOMPI_TARGET = normal_test_nompi
+NOMPI_SOURCES = normal_test_nompi.cpp
 
-# Mock mode flag
-MOCK ?= 1
-ifeq ($(MOCK),1)
-    CXXFLAGS += -DMOCK_MODE
-    MOCK_FEATURES = --features mock
-else
-    MOCK_FEATURES =
-endif
+.PHONY: all clean rebuild run run_rdma run_rdma_force run_tcp normal normal_rdma normal_rdma_force normal_tcp normal_nompi_rank0 normal_nompi_rank1 info help
 
-.PHONY: all clean rebuild driver single two_process
+all: $(TARGET) $(NORMAL_TARGET) $(NOMPI_TARGET)
 
-all: driver $(TARGET)
-
-# Build all test programs
-all_tests: driver $(TARGET) $(SINGLE_GPU_TARGET) $(TWO_PROCESS_TARGET)
-
-# Build the Blue RDMA driver first
-driver:
-	@echo "Building Blue RDMA driver with mock mode..."
-	cd $(BLUE_RDMA_IBVERBS) && cargo build --no-default-features $(MOCK_FEATURES)
-	@if [ ! -f $(RDMA_CORE_BUILD)/lib/libibverbs.so.1 ]; then \
-		echo "Building rdma-core..."; \
-		cd $(RDMA_CORE_BUILD)/.. && ./build.sh; \
-	fi
-
-# Compile the test program (MPI-based)
+# Compile the simple test program
 $(TARGET): $(SOURCES)
-	@echo "Compiling NCCL test program..."
-	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $(TARGET) $(SOURCES) $(LDFLAGS) $(LIBS)
+	@echo "Compiling RCCL simple test program..."
+	$(HIPCC) $(HIPCCFLAGS) $(INCLUDES) -o $(TARGET) $(SOURCES) $(LDFLAGS) $(LIBS)
 	@echo "Build complete: $(TARGET)"
 
-# Compile single GPU test (no MPI)
-$(SINGLE_GPU_TARGET): $(SINGLE_GPU_SOURCES)
-	@echo "Compiling single GPU test..."
-	nvcc $(CXXFLAGS) $(INCLUDES) -o $(SINGLE_GPU_TARGET) $(SINGLE_GPU_SOURCES) $(LDFLAGS) -lcudart -lnccl -libverbs -lpthread -ldl
-	@echo "Build complete: $(SINGLE_GPU_TARGET)"
+# Compile the normal test program (with AllReduce)
+$(NORMAL_TARGET): $(NORMAL_SOURCES)
+	@echo "Compiling RCCL normal test program (AllReduce)..."
+	$(HIPCC) $(HIPCCFLAGS) $(INCLUDES) -o $(NORMAL_TARGET) $(NORMAL_SOURCES) $(LDFLAGS) $(LIBS)
+	@echo "Build complete: $(NORMAL_TARGET)"
 
-# Compile two-process test (no MPI, uses sockets)
-$(TWO_PROCESS_TARGET): $(TWO_PROCESS_SOURCES)
-	@echo "Compiling two-process test..."
-	nvcc $(CXXFLAGS) $(INCLUDES) -o $(TWO_PROCESS_TARGET) $(TWO_PROCESS_SOURCES) $(LDFLAGS) -lcudart -lnccl -libverbs -lpthread -ldl
-	@echo "Build complete: $(TWO_PROCESS_TARGET)"
+# Compile the normal test program without MPI
+$(NOMPI_TARGET): $(NOMPI_SOURCES)
+	@echo "Compiling RCCL normal test program without MPI..."
+	$(HIPCC) $(HIPCCFLAGS) -I$(RCCL_INCLUDE) -I$(ROCM_HOME)/include -o $(NOMPI_TARGET) $(NOMPI_SOURCES) -L$(RCCL_LIB) -L$(ROCM_HOME)/lib -lrccl
+	@echo "Build complete: $(NOMPI_TARGET)"
 
 # Clean build artifacts
 clean:
-	rm -f $(TARGET) $(SINGLE_GPU_TARGET) $(TWO_PROCESS_TARGET) *.o
+	rm -f $(TARGET) $(NORMAL_TARGET) $(NOMPI_TARGET) *.o
 	@echo "Clean complete"
 
 # Rebuild everything
 rebuild: clean all
 
-# Run the test (single node, 2 processes) - DEPRECATED: use run_two instead
-run: $(TARGET)
-	@echo "⚠️  WARNING: This test doesn't work with single GPU (NCCL limitation)"
-	@echo "   Use 'make run_single' for basic testing"
-	@echo "   Or 'make run_two' for full network testing"
+# Run with RDMA (2 DCUs) - Each rank uses different RDMA device
+run_rdma: $(TARGET)
+	@echo "=========================================="
+	@echo "  Running RCCL Test with RDMA (2 DCUs)"
+	@echo "=========================================="
+	@echo "Rank 0 -> blue0, Rank 1 -> blue1"
 	@echo ""
-	@echo "Running NCCL test with Blue RDMA driver (mock mode)..."
-	@echo "Setting up environment..."
-	export LD_LIBRARY_PATH=$(BLUE_RDMA_IBVERBS)/target/debug:$(RDMA_CORE_BUILD)/lib:$(CUDA_HOME)/lib64:$(NCCL_HOME)/lib:$$LD_LIBRARY_PATH && \
-	export RUST_LOG=debug && \
-	export NCCL_IB_DISABLE=0 && \
-	export NCCL_NET=IB && \
-	export NCCL_IB_HCA=bluerdma && \
+	export PATH=$(MPI_HOME)/bin:$$PATH && \
+	export LD_LIBRARY_PATH=$(MPI_LIB):$$LD_LIBRARY_PATH && \
 	export NCCL_DEBUG=INFO && \
-	export NCCL_DEBUG_SUBSYS=INIT,NET && \
-	mpirun -np 2 --allow-run-as-root ./$(TARGET)
-
-# Run single GPU test (validates driver loading)
-run_single: $(SINGLE_GPU_TARGET)
-	@echo "=========================================="
-	@echo "  Running Single GPU Test"
-	@echo "=========================================="
-	@echo "This test validates:"
-	@echo "  ✓ CUDA runtime"
-	@echo "  ✓ NCCL initialization"
-	@echo "  ✓ Blue RDMA driver loading"
-	@echo "  ✓ Device query operations"
-	@echo ""
-	@echo "Note: No actual network communication (single process)"
-	@echo ""
-	export LD_LIBRARY_PATH=$(BLUE_RDMA_IBVERBS)/target/debug:$(RDMA_CORE_BUILD)/lib:$(CUDA_HOME)/lib64:$$LD_LIBRARY_PATH && \
-	export RUST_LOG=debug && \
 	export NCCL_IB_DISABLE=0 && \
-	export NCCL_NET=IB && \
-	export NCCL_IB_HCA=bluerdma && \
+	export NCCL_NET_GDR_LEVEL=0 && \
+	mpirun -np 2 \
+	  -x UCX_NET_DEVICES=blue0,blue1 \
+	  -x NCCL_DEBUG=INFO \
+	  -x NCCL_IB_DISABLE=0 \
+	  -x RUST_LOG=debug \
+	  -mca coll ^hcoll \
+	  ./$(TARGET)
+
+# Run with RDMA forcing network transport (disables P2P and SHM for testing)
+run_rdma_force: $(TARGET)
+	@echo "=========================================="
+	@echo "  Running RCCL Test - Force IB Network"
+	@echo "=========================================="
+	@echo "Disabling P2P and SHM to force IB network usage"
+	@echo "Using bluerdma0 and bluerdma1"
+	@echo ""
+	export PATH=$(MPI_HOME)/bin:$$PATH && \
+	export LD_LIBRARY_PATH=$(MPI_LIB):$$LD_LIBRARY_PATH && \
 	export NCCL_DEBUG=INFO && \
-	export NCCL_DEBUG_SUBSYS=INIT,NET && \
-	./$(SINGLE_GPU_TARGET)
-
-# Run two-process test (full network testing)
-run_two: $(TWO_PROCESS_TARGET)
-	@echo "=========================================="
-	@echo "  Running Two-Process Test"
-	@echo "=========================================="
-	@echo "This test requires TWO terminals:"
-	@echo ""
-	@echo "  Terminal 1 (Server):"
-	@echo "    $$ make run_two_server"
-	@echo ""
-	@echo "  Terminal 2 (Client):"
-	@echo "    $$ make run_two_client"
-	@echo ""
-	@echo "This test validates:"
-	@echo "  ✓ All features from single GPU test"
-	@echo "  ✓ Network communication between processes"
-	@echo "  ✓ RDMA send/recv operations"
-	@echo "  ✓ Completion queue polling"
-	@echo ""
-
-# Run two-process test - server (rank 0)
-run_two_server: $(TWO_PROCESS_TARGET)
-	@echo "Starting server (rank 0)..."
-	@echo "Waiting for client connection..."
-	@echo "⚠️  Note: Using NCCL_IGNORE_DISABLED_P2P=1 to allow single GPU testing"
-	export LD_LIBRARY_PATH=$(BLUE_RDMA_IBVERBS)/target/debug:$(RDMA_CORE_BUILD)/lib:$(CUDA_HOME)/lib64:$$LD_LIBRARY_PATH && \
-	export RUST_LOG=debug && \
 	export NCCL_IB_DISABLE=0 && \
-	export NCCL_NET=IB && \
-	export NCCL_IGNORE_DISABLED_P2P=1 && \
 	export NCCL_P2P_DISABLE=1 && \
-	export NCCL_DEBUG=INFO && \
-	export NCCL_DEBUG_SUBSYS=INIT,NET && \
-	export NCCL_DEBUG=WARN && \
-	./$(TWO_PROCESS_TARGET) 0
+	export NCCL_SHM_DISABLE=1 && \
+	export NCCL_NET_GDR_LEVEL=0 && \
+	export NCCL_IB_HCA=bluerdma0,bluerdma1 && \
+	mpirun -np 2 \
+	  -x UCX_NET_DEVICES=blue0,blue1 \
+	  -x NCCL_DEBUG=INFO \
+	  -x NCCL_DEBUG_SUBSYS=INIT,NET \
+	  -x NCCL_IB_DISABLE=0 \
+	  -x NCCL_IB_HCA=bluerdma0,bluerdma1 \
+	  -x NCCL_P2P_DISABLE=1 \
+	  -x NCCL_SHM_DISABLE=1 \
+	  -x NCCL_NET_GDR_LEVEL=0 \
+	  -x RUST_LOG=debug \
+	  -mca coll ^hcoll \
+	  ./$(TARGET)
 
-# Run two-process test - client (rank 1)
-run_two_client: $(TWO_PROCESS_TARGET)
-	@echo "Starting client (rank 1)..."
-	@echo "Connecting to server..."
-	@echo "⚠️  Note: Using NCCL_IGNORE_DISABLED_P2P=1 to allow single GPU testing"
-	export LD_LIBRARY_PATH=$(BLUE_RDMA_IBVERBS)/target/debug:$(RDMA_CORE_BUILD)/lib:$(CUDA_HOME)/lib64:$$LD_LIBRARY_PATH && \
-	export RUST_LOG=debug && \
-	export NCCL_IB_DISABLE=0 && \
-	export NCCL_NET=IB && \
-	export NCCL_IGNORE_DISABLED_P2P=1 && \
-	export NCCL_P2P_DISABLE=1 && \
+# Run with RDMA (4 DCUs) - Uses both RDMA devices
+run_rdma_4: $(TARGET)
+	@echo "=========================================="
+	@echo "  Running RCCL Test with RDMA (4 DCUs)"
+	@echo "=========================================="
+	@echo "Using blue0 and blue1 RDMA devices"
+	@echo ""
+	export PATH=$(MPI_HOME)/bin:$$PATH && \
+	export LD_LIBRARY_PATH=$(MPI_LIB):$$LD_LIBRARY_PATH && \
 	export NCCL_DEBUG=INFO && \
-	export NCCL_DEBUG_SUBSYS=INIT,NET && \
-	./$(TWO_PROCESS_TARGET) 1
+	export NCCL_IB_DISABLE=0 && \
+	mpirun -np 4 \
+	  -x UCX_NET_DEVICES=blue0,blue1 \
+	  -x NCCL_DEBUG=INFO \
+	  -x NCCL_IB_DISABLE=0 \
+	  -mca coll ^hcoll \
+	  ./$(TARGET)
+
+# Run with TCP (2 DCUs)
+run_tcp: $(TARGET)
+	@echo "=========================================="
+	@echo "  Running RCCL Test with TCP (2 DCUs)"
+	@echo "=========================================="
+	@echo "Using TCP instead of RDMA"
+	@echo ""
+	export PATH=$(MPI_HOME)/bin:$$PATH && \
+	export LD_LIBRARY_PATH=$(MPI_LIB):$$LD_LIBRARY_PATH && \
+	export NCCL_DEBUG=INFO && \
+	mpirun -np 2 \
+	  -x UCX_TLS=tcp,self \
+	  -x HCOLL_ENABLE_MCAST=0 \
+	  -x NCCL_DEBUG=INFO \
+	  ./$(TARGET)
+
+# Run with TCP (4 DCUs)
+run_tcp_4: $(TARGET)
+	@echo "=========================================="
+	@echo "  Running RCCL Test with TCP (4 DCUs)"
+	@echo "=========================================="
+	@echo "Using TCP instead of RDMA"
+	@echo ""
+	export PATH=$(MPI_HOME)/bin:$$PATH && \
+	export LD_LIBRARY_PATH=$(MPI_LIB):$$LD_LIBRARY_PATH && \
+	export NCCL_DEBUG=INFO && \
+	mpirun -np 4 \
+	  -x UCX_TLS=tcp,self \
+	  -x HCOLL_ENABLE_MCAST=0 \
+	  -x NCCL_DEBUG=INFO \
+	  ./$(TARGET)
+
+# Run normal_test with RDMA (2 DCUs) - Tests actual data transfer
+normal_rdma: $(NORMAL_TARGET)
+	@echo "=========================================="
+	@echo "  Running Normal Test with RDMA (2 DCUs)"
+	@echo "=========================================="
+	@echo "Testing AllReduce with RDMA"
+	@echo "Rank 0 -> blue0, Rank 1 -> blue1"
+	@echo ""
+	export PATH=$(MPI_HOME)/bin:$$PATH && \
+	export LD_LIBRARY_PATH=$(MPI_LIB):$$LD_LIBRARY_PATH && \
+	export NCCL_DEBUG=INFO && \
+	export NCCL_IB_DISABLE=0 && \
+	mpirun -np 2 \
+	  -x UCX_NET_DEVICES=blue0,blue1 \
+	  -x NCCL_DEBUG=INFO \
+	  -x NCCL_IB_DISABLE=0 \
+	  -mca coll ^hcoll \
+	  ./$(NORMAL_TARGET)
+
+# Run normal_test forcing IB network (disables P2P and SHM)
+normal_rdma_force: $(NORMAL_TARGET)
+	@echo "=========================================="
+	@echo "  Normal Test - Force IB Network (2 DCUs)"
+	@echo "=========================================="
+	@echo "Disabling P2P and SHM to force IB network usage"
+	@echo "Using bluerdma0 and bluerdma1"
+	@echo ""
+	export PATH=$(MPI_HOME)/bin:$$PATH && \
+	export LD_LIBRARY_PATH=$(MPI_LIB):$$LD_LIBRARY_PATH && \
+	export NCCL_DEBUG=INFO && \
+	export NCCL_IB_DISABLE=0 && \
+	export NCCL_P2P_DISABLE=1 && \
+	export NCCL_SHM_DISABLE=1 && \
+	export NCCL_NET_GDR_LEVEL=0 && \
+	export NCCL_IB_HCA=bluerdma0,bluerdma1 && \
+	mpirun -np 2 \
+	  -x UCX_NET_DEVICES=blue0,blue1 \
+	  -x NCCL_DEBUG=INFO \
+	  -x NCCL_DEBUG_SUBSYS=INIT,NET \
+	  -x NCCL_IB_DISABLE=0 \
+	  -x NCCL_IB_HCA=bluerdma0,bluerdma1 \
+	  -x NCCL_P2P_DISABLE=1 \
+	  -x NCCL_SHM_DISABLE=1 \
+	  -x NCCL_NET_GDR_LEVEL=0 \
+	  -x RUST_LOG=debug \
+	  -mca coll ^hcoll \
+	  ./$(NORMAL_TARGET)
+
+# Run normal_test with RDMA (4 DCUs)
+normal_rdma_4: $(NORMAL_TARGET)
+	@echo "=========================================="
+	@echo "  Running Normal Test with RDMA (4 DCUs)"
+	@echo "=========================================="
+	@echo "Testing AllReduce with RDMA"
+	@echo "Using blue0 and blue1 RDMA devices"
+	@echo ""
+	export PATH=$(MPI_HOME)/bin:$$PATH && \
+	export LD_LIBRARY_PATH=$(MPI_LIB):$$LD_LIBRARY_PATH && \
+	export NCCL_DEBUG=INFO && \
+	export NCCL_IB_DISABLE=0 && \
+	mpirun -np 4 \
+	  -x UCX_NET_DEVICES=blue0,blue1 \
+	  -x NCCL_DEBUG=INFO \
+	  -x NCCL_IB_DISABLE=0 \
+	  -mca coll ^hcoll \
+	  ./$(NORMAL_TARGET)
+
+# Run normal_test with TCP (2 DCUs)
+normal_tcp: $(NORMAL_TARGET)
+	@echo "=========================================="
+	@echo "  Running Normal Test with TCP (2 DCUs)"
+	@echo "=========================================="
+	@echo "Testing AllReduce with TCP"
+	@echo ""
+	export PATH=$(MPI_HOME)/bin:$$PATH && \
+	export LD_LIBRARY_PATH=$(MPI_LIB):$$LD_LIBRARY_PATH && \
+	export NCCL_DEBUG=INFO && \
+	mpirun -np 2 \
+	  -x UCX_TLS=tcp,self \
+	  -x HCOLL_ENABLE_MCAST=0 \
+	  -x NCCL_DEBUG=INFO \
+	  ./$(NORMAL_TARGET)
+
+# Run normal_test with TCP (4 DCUs)
+normal_tcp_4: $(NORMAL_TARGET)
+	@echo "=========================================="
+	@echo "  Running Normal Test with TCP (4 DCUs)"
+	@echo "=========================================="
+	@echo "Testing AllReduce with TCP"
+	@echo ""
+	export PATH=$(MPI_HOME)/bin:$$PATH && \
+	export LD_LIBRARY_PATH=$(MPI_LIB):$$LD_LIBRARY_PATH && \
+	export NCCL_DEBUG=INFO && \
+	mpirun -np 4 \
+	  -x UCX_TLS=tcp,self \
+	  -x HCOLL_ENABLE_MCAST=0 \
+	  -x NCCL_DEBUG=INFO \
+	  ./$(NORMAL_TARGET)
+
+# Run normal_test_nompi as rank 0 (server) with blue0 RDMA device
+normal_nompi_rank0: $(NOMPI_TARGET)
+	@echo "=========================================="
+	@echo "  Normal Test No-MPI - Rank 0 (Server)"
+	@echo "=========================================="
+	@echo "Using RDMA device: bluerdma0 only"
+	@echo "Run 'make normal_nompi_rank1' in another terminal"
+	@echo ""
+	export NCCL_DEBUG=INFO && \
+	export NCCL_IB_DISABLE=0 && \
+	export NCCL_IB_HCA=bluerdma0 && \
+	export UCX_NET_DEVICES=blue0 && \
+	export NCCL_NET_GDR_LEVEL=0 && \
+		export NCCL_P2P_DISABLE=1 && \
+	export NCCL_SHM_DISABLE=1 && \
+	./$(NOMPI_TARGET) 0
+
+# Run normal_test_nompi as rank 1 (client) with blue1 RDMA device
+normal_nompi_rank1: $(NOMPI_TARGET)
+	@echo "=========================================="
+	@echo "  Normal Test No-MPI - Rank 1 (Client)"
+	@echo "=========================================="
+	@echo "Using RDMA device: bluerdma1 only"
+	@echo "Connecting to rank 0..."
+	@echo ""
+	export NCCL_DEBUG=INFO && \
+	export NCCL_IB_DISABLE=0 && \
+	export NCCL_IB_HCA=bluerdma1 && \
+	export UCX_NET_DEVICES=blue1 && \
+	export NCCL_NET_GDR_LEVEL=0 && \
+		export NCCL_P2P_DISABLE=1 && \
+	export NCCL_SHM_DISABLE=1 && \
+	./$(NOMPI_TARGET) 1
+
+# Default run target (RDMA with 2 DCUs)
+run: run_rdma
+
+# Default normal test target
+normal: normal_rdma
 
 # Show configuration
 info:
 	@echo "==================================="
 	@echo "  Build Configuration"
 	@echo "==================================="
-	@echo "CUDA_HOME:     $(CUDA_HOME)"
-ifdef NCCL_INCLUDE
-	@echo "NCCL_INCLUDE:  $(NCCL_INCLUDE)"
-	@echo "NCCL_LIB:      $(NCCL_LIB)"
-else
-	@echo "NCCL:          Not found"
-endif
+	@echo "ROCM_HOME:     $(ROCM_HOME)"
+	@echo "DTK_HOME:      $(DTK_HOME)"
+	@echo "RCCL_INCLUDE:  $(RCCL_INCLUDE)"
+	@echo "RCCL_LIB:      $(RCCL_LIB)"
 	@echo "MPI_HOME:      $(MPI_HOME)"
-	@echo "RDMA Core:     $(RDMA_CORE_BUILD)"
+	@echo "MPI_INCLUDE:   $(MPI_INCLUDE)"
+	@echo "MPI_LIB:       $(MPI_LIB)"
 	@echo ""
-	@echo "Compiler:      $(CXX)"
-	@echo "Flags:         $(CXXFLAGS)"
+	@echo "Compiler:      $(HIPCC)"
+	@echo "Flags:         $(HIPCCFLAGS)"
 	@echo "Includes:      $(INCLUDES)"
 	@echo "Libs:          $(LIBS)"
+	@echo ""
+	@echo "RDMA Devices:"
+	@rdma link show 2>/dev/null || echo "  No RDMA devices found"
+	@echo ""
+	@echo "DCU Devices:"
+	@rocm-smi --showid 2>/dev/null || echo "  No DCU devices found"
 	@echo ""
 
 # Help target
 help:
 	@echo "================================================"
-	@echo "  NCCL Blue RDMA Driver Test Suite"
+	@echo "  RCCL Test Suite for ROCm and Blue RDMA"
 	@echo "================================================"
 	@echo ""
 	@echo "Build Targets:"
-	@echo "  all          - Build driver and MPI test (default)"
-	@echo "  all_tests    - Build all test programs"
-	@echo "  driver       - Build Blue RDMA driver only"
+	@echo "  all          - Build RCCL test program (default)"
 	@echo "  clean        - Remove build artifacts"
 	@echo "  rebuild      - Clean and rebuild"
 	@echo ""
-	@echo "Test Targets:"
-	@echo "  run_single       - Run single GPU test (driver validation)"
-	@echo "  run_two_server   - Run two-process test server (rank 0)"
-	@echo "  run_two_client   - Run two-process test client (rank 1)"
-	@echo "  run              - (Deprecated) MPI test - doesn't work with 1 GPU"
+	@echo "Run Targets (Simple Test):"
+	@echo "  run              - Run simple test with RDMA (2 DCUs) - default"
+	@echo "  run_rdma         - Run simple test with RDMA (2 DCUs)"
+	@echo "  run_rdma_force   - Force IB network (disable P2P)"
+	@echo "  run_rdma_4       - Run simple test with RDMA (4 DCUs)"
+	@echo "  run_tcp          - Run simple test with TCP (2 DCUs)"
+	@echo "  run_tcp_4        - Run simple test with TCP (4 DCUs)"
+	@echo ""
+	@echo "Run Targets (Normal Test - AllReduce):"
+	@echo "  normal              - Run normal test with RDMA (2 DCUs) - default"
+	@echo "  normal_rdma         - Run normal test with RDMA (2 DCUs)"
+	@echo "  normal_rdma_force   - Force IB network (disable P2P)"
+	@echo "  normal_rdma_4       - Run normal test with RDMA (4 DCUs)"
+	@echo "  normal_tcp          - Run normal test with TCP (2 DCUs)"
+	@echo "  normal_tcp_4        - Run normal test with TCP (4 DCUs)"
+	@echo ""
+	@echo "Run Targets (Normal Test - No MPI):"
+	@echo "  normal_nompi_rank0  - Run rank 0 with blue0 (run in terminal 1)"
+	@echo "  normal_nompi_rank1  - Run rank 1 with blue1 (run in terminal 2)"
 	@echo ""
 	@echo "Info Targets:"
 	@echo "  info         - Show build configuration"
 	@echo "  help         - Show this help message"
 	@echo ""
-	@echo "Options:"
-	@echo "  MOCK=1       - Build with mock mode support (default)"
+	@echo "Examples:"
+	@echo "  make                    # Build all programs"
+	@echo "  make info               # Show configuration"
+	@echo "  make run_rdma           # Run simple test with RDMA (2 DCUs)"
+	@echo "  make normal_rdma        # Run AllReduce test with RDMA (2 DCUs)"
+	@echo "  make normal_tcp         # Run AllReduce test with TCP (2 DCUs)"
 	@echo ""
-	@echo "Recommended Testing Flow:"
-	@echo "  1. make run_single      # Validate driver loading"
-	@echo "  2. Terminal 1: make run_two_server"
-	@echo "     Terminal 2: make run_two_client"
+	@echo "  # Run without MPI (in two terminals):"
+	@echo "  Terminal 1: make normal_nompi_rank0"
+	@echo "  Terminal 2: make normal_nompi_rank1"
 	@echo ""
+	@echo "Environment Variables (optional):"
+	@echo "  NCCL_DEBUG=INFO     - Enable RCCL debug output"
+	@echo "  NCCL_IB_DISABLE=0   - Enable InfiniBand/RDMA"
+	@echo "  UCX_NET_DEVICES     - Specify network device"
 	@echo ""
-	@echo "Example usage:"
-	@echo "  make info          # Show detected paths"
-	@echo "  make MOCK=1        # Build with mock mode"
-	@echo "  make run MOCK=1    # Build and run with mock mode"

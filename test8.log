@@ -1,0 +1,824 @@
+==========================================
+  Running RCCL Test - Force IB Network
+==========================================
+Disabling P2P and SHM to force IB network usage
+Using bluerdma0 and bluerdma1
+
+export PATH=/usr/mpi/gcc/openmpi-4.1.7rc1/bin:$PATH && \
+export LD_LIBRARY_PATH=/usr/mpi/gcc/openmpi-4.1.7rc1/lib:$LD_LIBRARY_PATH && \
+export NCCL_DEBUG=INFO && \
+export NCCL_IB_DISABLE=0 && \
+export NCCL_P2P_DISABLE=1 && \
+export NCCL_SHM_DISABLE=1 && \
+export NCCL_NET_GDR_LEVEL=0 && \
+export NCCL_IB_HCA=bluerdma0,bluerdma1 && \
+mpirun -np 2 \
+  -x UCX_NET_DEVICES=blue0,blue1 \
+  -x NCCL_DEBUG=INFO \
+  -x NCCL_DEBUG_SUBSYS=INIT,NET \
+  -x NCCL_IB_DISABLE=0 \
+  -x NCCL_IB_HCA=bluerdma0,bluerdma1 \
+  -x NCCL_P2P_DISABLE=1 \
+  -x NCCL_SHM_DISABLE=1 \
+  -x NCCL_NET_GDR_LEVEL=0 \
+  -x RUST_LOG=debug \
+  -mca coll ^hcoll \
+  ./test
+Setting op alloc_pd
+Setting op create_cq
+Setting op create_qp
+Setting op dealloc_pd
+Setting op dereg_mr
+Setting op destroy_cq
+Setting op destroy_qp
+Setting op modify_qp
+Setting op poll_cq
+Setting op post_recv
+Setting op post_send
+Setting op query_device_ex
+Setting op query_port
+Setting op query_qp
+Setting op reg_mr
+bluerdma device allocated
+Setting op alloc_pd
+Setting op create_cq
+Setting op create_qp
+Setting op dealloc_pd
+Setting op dereg_mr
+Setting op destroy_cq
+Setting op destroy_qp
+Setting op modify_qp
+Setting op poll_cq
+Setting op post_recv
+Setting op post_send
+Setting op query_device_ex
+Setting op query_port
+Setting op query_qp
+Setting op reg_mr
+bluerdma device allocated
+Setting op alloc_pd
+Setting op create_cq
+Setting op create_qp
+Setting op alloc_pd
+Setting op create_cq
+Setting op create_qp
+Setting op dealloc_pd
+Setting op dereg_mr
+Setting op destroy_cq
+Setting op destroy_qp
+Setting op dealloc_pd
+Setting op dereg_mr
+Setting op destroy_cq
+Setting op destroy_qp
+Setting op modify_qp
+Setting op poll_cq
+Setting op post_recv
+Setting op post_send
+Setting op query_device_ex
+Setting op query_port
+Setting op query_qp
+Setting op reg_mr
+bluerdma device allocated
+Setting op modify_qp
+Setting op poll_cq
+Setting op post_recv
+Setting op post_send
+Setting op query_device_ex
+Setting op query_port
+Setting op query_qp
+Setting op reg_mr
+bluerdma device allocated
+[ROCT-Thunk-Interface/src/hymgr.c:309, WARNING]: Version mismatch
+[ROCT-Thunk-Interface/src/hymgr.c:309, WARNING]: Version mismatch
+Rank 0/2 using GPU 0
+Rank 1/2 using GPU 1
+master1:2467047:2467047 [0] NCCL INFO Bootstrap : Using eno1:10.18.17.142<0>
+master1:2467047:2467047 [0] NCCL INFO NET/Plugin : No plugin found (librccl-net.so), using internal implementation
+Rank 0 generated NCCL ID
+Rank 0 about to call ncclCommInitRank
+RCCL version 2.13.4+hip5.7 HEAD:2890a73
+Rank 1 about to call ncclCommInitRank
+master1:2467047:2467047 [0] NCCL INFO NCCL_IB_DISABLE set by environment to 0.
+master1:2467047:2467047 [0] NCCL INFO NCCL_IB_HCA set to bluerdma0,bluerdma1
+[2025-11-17T07:50:59.214525266Z DEBUG blue_rdma_driver::verbs::core] before create hardware ctx
+[2025-11-17T07:50:59.214754456Z DEBUG blue_rdma_driver::verbs::core] before load default
+[2025-11-17T07:50:59.214854710Z WARN  blue_rdma_driver::config] can't load config from /etc/bluerdma/config.toml, using default value
+[2025-11-17T07:50:59.214951274Z DEBUG blue_rdma_driver::verbs::core] before open default
+[2025-11-17T07:50:59.225064165Z INFO  bluerdma_rust::rxe::ctx_ops] Querying device attributes
+[2025-11-17T07:50:59.225165679Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+
+master1:2467047:2467047 [0] /data/jenkins_workspace/workspace/rccl_release/src/transport/net_ib.cc:114 NCCL WARN Could not find real path of bluerdma0 (/sys/class/infiniband/bluerdma0/device)
+[2025-11-17T07:50:59.225505783Z DEBUG blue_rdma_driver::verbs::core] before create hardware ctx
+[2025-11-17T07:50:59.225608747Z DEBUG blue_rdma_driver::verbs::core] before load default
+[2025-11-17T07:50:59.225679150Z WARN  blue_rdma_driver::config] can't load config from /etc/bluerdma/config.toml, using default value
+[2025-11-17T07:50:59.225754023Z DEBUG blue_rdma_driver::verbs::core] before open default
+[2025-11-17T07:50:59.235740059Z INFO  bluerdma_rust::rxe::ctx_ops] Querying device attributes
+[2025-11-17T07:50:59.235840263Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+
+master1:2467047:2467047 [0] /data/jenkins_workspace/workspace/rccl_release/src/transport/net_ib.cc:114 NCCL WARN Could not find real path of bluerdma1 (/sys/class/infiniband/bluerdma1/device)
+master1:2467047:2467047 [0] NCCL INFO NET/IB : Using [0]bluerdma0:1/RoCE [1]bluerdma1:1/RoCE [RO]; OOB eno1:10.18.17.142<0>
+master1:2467047:2467047 [0] NCCL INFO Using network IB
+master1:2467048:2467048 [1] NCCL INFO Bootstrap : Using eno1:10.18.17.142<0>
+master1:2467048:2467048 [1] NCCL INFO NET/Plugin : No plugin found (librccl-net.so), using internal implementation
+master1:2467048:2467048 [1] NCCL INFO NCCL_IB_DISABLE set by environment to 0.
+master1:2467048:2467048 [1] NCCL INFO NCCL_IB_HCA set to bluerdma0,bluerdma1
+[2025-11-17T07:50:59.701187975Z DEBUG blue_rdma_driver::verbs::core] before create hardware ctx
+[2025-11-17T07:50:59.701445396Z DEBUG blue_rdma_driver::verbs::core] before load default
+[2025-11-17T07:50:59.701534830Z WARN  blue_rdma_driver::config] can't load config from /etc/bluerdma/config.toml, using default value
+[2025-11-17T07:50:59.701630554Z DEBUG blue_rdma_driver::verbs::core] before open default
+[2025-11-17T07:50:59.711345238Z INFO  bluerdma_rust::rxe::ctx_ops] Querying device attributes
+[2025-11-17T07:50:59.711421221Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+
+master1:2467048:2467048 [1] /data/jenkins_workspace/workspace/rccl_release/src/transport/net_ib.cc:114 NCCL WARN Could not find real path of bluerdma0 (/sys/class/infiniband/bluerdma0/device)
+[2025-11-17T07:50:59.711685452Z DEBUG blue_rdma_driver::verbs::core] before create hardware ctx
+[2025-11-17T07:50:59.711775286Z DEBUG blue_rdma_driver::verbs::core] before load default
+[2025-11-17T07:50:59.711840848Z WARN  blue_rdma_driver::config] can't load config from /etc/bluerdma/config.toml, using default value
+[2025-11-17T07:50:59.711918231Z DEBUG blue_rdma_driver::verbs::core] before open default
+[2025-11-17T07:50:59.721305542Z INFO  bluerdma_rust::rxe::ctx_ops] Querying device attributes
+[2025-11-17T07:50:59.721381175Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+
+master1:2467048:2467048 [1] /data/jenkins_workspace/workspace/rccl_release/src/transport/net_ib.cc:114 NCCL WARN Could not find real path of bluerdma1 (/sys/class/infiniband/bluerdma1/device)
+master1:2467048:2467048 [1] NCCL INFO NET/IB : Using [0]bluerdma0:1/RoCE [1]bluerdma1:1/RoCE [RO]; OOB eno1:10.18.17.142<0>
+master1:2467048:2467048 [1] NCCL INFO Using network IB
+[2025-11-17T07:51:00.149579623Z INFO  bluerdma_rust::rxe::ctx_ops] Allocating protection domain
+[2025-11-17T07:51:00.149579543Z INFO  bluerdma_rust::rxe::ctx_ops] Allocating protection domain
+[2025-11-17T07:51:00.149730670Z INFO  bluerdma_rust::rxe::ctx_ops] Deallocating protection domain
+[2025-11-17T07:51:00.149737070Z INFO  bluerdma_rust::rxe::ctx_ops] Deallocating protection domain
+master1:2467047:2467047 [0] NCCL INFO rocm_smi_lib: version 2.8.0.0
+master1:2467048:2467048 [1] NCCL INFO rocm_smi_lib: version 2.8.0.0
+master1:2467047:2467047 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'bluerdma0'
+master1:2467047:2467047 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 1 'bluerdma1'
+master1:2467048:2467048 [1] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'bluerdma0'
+master1:2467048:2467048 [1] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 1 'bluerdma1'
+master1:2467047:2467047 [0] NCCL INFO NCCL_P2P_LEVEL set by environment to LOC
+master1:2467047:2467047 [0] NCCL INFO NCCL_SHM_DISABLE set by environment to 1.
+master1:2467047:2467047 [0] NCCL INFO Setting affinity for GPU 0 to 01,00000001
+master1:2467048:2467048 [1] NCCL INFO NCCL_P2P_LEVEL set by environment to LOC
+master1:2467048:2467048 [1] NCCL INFO NCCL_SHM_DISABLE set by environment to 1.
+master1:2467047:2467047 [0] NCCL INFO Channel 00/04 :    0   1
+master1:2467047:2467047 [0] NCCL INFO Channel 01/04 :    0   1
+master1:2467047:2467047 [0] NCCL INFO Channel 02/04 :    0   1
+master1:2467047:2467047 [0] NCCL INFO Channel 03/04 :    0   1
+master1:2467048:2467048 [1] NCCL INFO Trees [0] -1/-1/-1->1->0 [1] 0/-1/-1->1->-1 [2] -1/-1/-1->1->0 [3] 0/-1/-1->1->-1 comm 0x7198c80 nRanks 02 busId 26000
+master1:2467047:2467047 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] -1/-1/-1->0->1 [2] 1/-1/-1->0->-1 [3] -1/-1/-1->0->1 comm 0x3b0b38f0 nRanks 02 busId 4000
+master1:2467048:2467132 [1] NCCL INFO New proxy recv connection 0 from local rank 0, transport 2
+master1:2467048:2467048 [1] NCCL INFO Connection to proxy localRank 0 -> connection 0x7d03180015f0
+master1:2467048:2467048 [1] NCCL INFO Channel 00/0 : 0[4000] -> 1[26000] [receive] via NET/IB/1 comm 0x7198c80 nRanks 02
+master1:2467048:2467132 [1] NCCL INFO New proxy recv connection 1 from local rank 0, transport 2
+master1:2467047:2467131 [0] NCCL INFO New proxy recv connection 0 from local rank 0, transport 2
+master1:2467047:2467047 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x73440c001670
+master1:2467047:2467047 [0] NCCL INFO Channel 00/0 : 1[26000] -> 0[4000] [receive] via NET/IB/0 comm 0x3b0b38f0 nRanks 02
+master1:2467047:2467131 [0] NCCL INFO New proxy recv connection 1 from local rank 0, transport 2
+master1:2467048:2467048 [1] NCCL INFO Connection to proxy localRank 0 -> connection 0x7d0318001628
+master1:2467048:2467048 [1] NCCL INFO Channel 01/0 : 0[4000] -> 1[26000] [receive] via NET/IB/1 comm 0x7198c80 nRanks 02
+master1:2467048:2467132 [1] NCCL INFO New proxy recv connection 2 from local rank 0, transport 2
+master1:2467047:2467047 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x73440c0016a8
+master1:2467047:2467047 [0] NCCL INFO Channel 01/0 : 1[26000] -> 0[4000] [receive] via NET/IB/0 comm 0x3b0b38f0 nRanks 02
+master1:2467047:2467131 [0] NCCL INFO New proxy recv connection 2 from local rank 0, transport 2
+master1:2467048:2467048 [1] NCCL INFO Connection to proxy localRank 0 -> connection 0x7d0318001660
+master1:2467048:2467048 [1] NCCL INFO Channel 02/0 : 0[4000] -> 1[26000] [receive] via NET/IB/1 comm 0x7198c80 nRanks 02
+master1:2467048:2467132 [1] NCCL INFO New proxy recv connection 3 from local rank 0, transport 2
+master1:2467047:2467047 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x73440c0016e0
+master1:2467047:2467047 [0] NCCL INFO Channel 02/0 : 1[26000] -> 0[4000] [receive] via NET/IB/0 comm 0x3b0b38f0 nRanks 02
+master1:2467047:2467131 [0] NCCL INFO New proxy recv connection 3 from local rank 0, transport 2
+master1:2467048:2467048 [1] NCCL INFO Connection to proxy localRank 0 -> connection 0x7d0318001698
+master1:2467047:2467047 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x73440c001718
+master1:2467047:2467047 [0] NCCL INFO Channel 03/0 : 1[26000] -> 0[4000] [receive] via NET/IB/0 comm 0x3b0b38f0 nRanks 02
+master1:2467048:2467048 [1] NCCL INFO Channel 03/0 : 0[4000] -> 1[26000] [receive] via NET/IB/1 comm 0x7198c80 nRanks 02
+master1:2467047:2467131 [0] NCCL INFO New proxy send connection 4 from local rank 0, transport 2
+master1:2467048:2467132 [1] NCCL INFO New proxy send connection 4 from local rank 0, transport 2
+master1:2467048:2467048 [1] NCCL INFO Connection to proxy localRank 0 -> connection 0x7d03180016d0
+master1:2467047:2467047 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x73440c001750
+master1:2467048:2467048 [1] NCCL INFO Channel 00/0 : 1[26000] -> 0[4000] [send] via NET/IB/1 comm 0x7198c80 nRanks 02
+master1:2467047:2467047 [0] NCCL INFO Channel 00/0 : 0[4000] -> 1[26000] [send] via NET/IB/0 comm 0x3b0b38f0 nRanks 02
+master1:2467048:2467132 [1] NCCL INFO New proxy send connection 5 from local rank 0, transport 2
+master1:2467047:2467131 [0] NCCL INFO New proxy send connection 5 from local rank 0, transport 2
+master1:2467048:2467048 [1] NCCL INFO Connection to proxy localRank 0 -> connection 0x7d0318001708
+master1:2467047:2467047 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x73440c001788
+master1:2467047:2467047 [0] NCCL INFO Channel 01/0 : 0[4000] -> 1[26000] [send] via NET/IB/0 comm 0x3b0b38f0 nRanks 02
+master1:2467048:2467048 [1] NCCL INFO Channel 01/0 : 1[26000] -> 0[4000] [send] via NET/IB/1 comm 0x7198c80 nRanks 02
+master1:2467047:2467131 [0] NCCL INFO New proxy send connection 6 from local rank 0, transport 2
+master1:2467048:2467132 [1] NCCL INFO New proxy send connection 6 from local rank 0, transport 2
+master1:2467047:2467047 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x73440c0017c0
+master1:2467048:2467048 [1] NCCL INFO Connection to proxy localRank 0 -> connection 0x7d0318001740
+master1:2467047:2467047 [0] NCCL INFO Channel 02/0 : 0[4000] -> 1[26000] [send] via NET/IB/0 comm 0x3b0b38f0 nRanks 02
+master1:2467048:2467048 [1] NCCL INFO Channel 02/0 : 1[26000] -> 0[4000] [send] via NET/IB/1 comm 0x7198c80 nRanks 02
+master1:2467047:2467131 [0] NCCL INFO New proxy send connection 7 from local rank 0, transport 2
+master1:2467048:2467132 [1] NCCL INFO New proxy send connection 7 from local rank 0, transport 2
+master1:2467047:2467047 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x73440c0017f8
+master1:2467048:2467048 [1] NCCL INFO Connection to proxy localRank 0 -> connection 0x7d0318001778
+master1:2467047:2467047 [0] NCCL INFO Channel 03/0 : 0[4000] -> 1[26000] [send] via NET/IB/0 comm 0x3b0b38f0 nRanks 02
+master1:2467048:2467048 [1] NCCL INFO Channel 03/0 : 1[26000] -> 0[4000] [send] via NET/IB/1 comm 0x7198c80 nRanks 02
+[2025-11-17T07:51:00.486503527Z INFO  bluerdma_rust::rxe::ctx_ops] Allocating protection domain
+[2025-11-17T07:51:00.486660523Z INFO  bluerdma_rust::rxe::ctx_ops] Creating completion queue
+[2025-11-17T07:51:00.486662624Z INFO  bluerdma_rust::rxe::ctx_ops] Allocating protection domain
+[2025-11-17T07:51:00.486757718Z INFO  blue_rdma_driver::verbs::mock] mock create cq, handle: 1
+[2025-11-17T07:51:00.486781999Z INFO  bluerdma_rust::rxe::ctx_ops] Creating completion queue
+[2025-11-17T07:51:00.486849151Z INFO  bluerdma_rust::rxe::ctx_ops] Creating queue pair
+[2025-11-17T07:51:00.486860892Z INFO  blue_rdma_driver::verbs::mock] mock create cq, handle: 1
+[2025-11-17T07:51:00.486966906Z INFO  bluerdma_rust::rxe::ctx_ops] Creating queue pair
+[2025-11-17T07:51:00.487012158Z INFO  blue_rdma_driver::verbs::mock] set send cq: 1 for qp: 9492
+[2025-11-17T07:51:00.487089191Z INFO  blue_rdma_driver::verbs::mock] set recv cq: 1 for qp: 9492
+[2025-11-17T07:51:00.487111882Z INFO  blue_rdma_driver::verbs::mock] set send cq: 1 for qp: 6846
+[2025-11-17T07:51:00.487163044Z INFO  blue_rdma_driver::verbs::mock] device binding to 0.0.0.0:19492
+[2025-11-17T07:51:00.487186935Z INFO  blue_rdma_driver::verbs::mock] set recv cq: 1 for qp: 6846
+[2025-11-17T07:51:00.487269429Z INFO  blue_rdma_driver::verbs::mock] device binding to 0.0.0.0:16846
+[2025-11-17T07:51:00.487412875Z INFO  blue_rdma_driver::verbs::mock] mock create qp: 9492
+[2025-11-17T07:51:00.487475667Z INFO  blue_rdma_driver::verbs::mock] mock create qp: 6846
+[2025-11-17T07:51:00.487489518Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.487550930Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.487552501Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 9492, peer qp: None
+[2025-11-17T07:51:00.487621443Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+[2025-11-17T07:51:00.487614633Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 6846, peer qp: None
+[2025-11-17T07:51:00.487685496Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+[2025-11-17T07:51:00.487695257Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.487755829Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.487815512Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d0318033040, length: 32768, access: 7, phys_addr: Some(64)
+master1:2467048:2467132 [1] NCCL INFO NET/IB: Dev 1 Port 1 qpn 9492 mtu 5 GID 0 (80FE/D5F8DEFEFF1ADE70)
+[2025-11-17T07:51:00.487855913Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 73440c033040, length: 32768, access: 7, phys_addr: Some(64)
+master1:2467047:2467131 [0] NCCL INFO NET/IB: Dev 0 Port 1 qpn 6846 mtu 5 GID 0 (80FE/98388EFEFFF55A7C)
+[2025-11-17T07:51:00.524018867Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.524185614Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d0303a00000, length: 262144, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.524302889Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.524385723Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d0303a40000, length: 458752, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.524485377Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.524565650Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d0303ab0000, length: 4194304, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.524822411Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.524937416Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 733feea00000, length: 262144, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.525040760Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.525120873Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 733feea40000, length: 458752, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.525221037Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.525310771Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 733feeab0000, length: 4194304, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.539700220Z INFO  bluerdma_rust::rxe::ctx_ops] Creating completion queue
+[2025-11-17T07:51:00.539825075Z INFO  blue_rdma_driver::verbs::mock] mock create cq, handle: 2
+[2025-11-17T07:51:00.539883507Z INFO  bluerdma_rust::rxe::ctx_ops] Creating completion queue
+[2025-11-17T07:51:00.539907178Z INFO  bluerdma_rust::rxe::ctx_ops] Creating queue pair
+[2025-11-17T07:51:00.539977301Z INFO  blue_rdma_driver::verbs::mock] mock create cq, handle: 2
+[2025-11-17T07:51:00.539976151Z INFO  blue_rdma_driver::verbs::mock] set send cq: 2 for qp: 1962
+[2025-11-17T07:51:00.540047064Z INFO  bluerdma_rust::rxe::ctx_ops] Creating queue pair
+[2025-11-17T07:51:00.540045714Z INFO  blue_rdma_driver::verbs::mock] set recv cq: 2 for qp: 1962
+[2025-11-17T07:51:00.540112677Z INFO  blue_rdma_driver::verbs::mock] set send cq: 2 for qp: 4822
+[2025-11-17T07:51:00.540116957Z INFO  blue_rdma_driver::verbs::mock] device binding to 0.0.0.0:11962
+[2025-11-17T07:51:00.540180540Z INFO  blue_rdma_driver::verbs::mock] set recv cq: 2 for qp: 4822
+[2025-11-17T07:51:00.540251333Z INFO  blue_rdma_driver::verbs::mock] device binding to 0.0.0.0:14822
+[2025-11-17T07:51:00.540348577Z INFO  blue_rdma_driver::verbs::mock] mock create qp: 1962
+[2025-11-17T07:51:00.540424070Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.540446951Z INFO  blue_rdma_driver::verbs::mock] mock create qp: 4822
+[2025-11-17T07:51:00.540489712Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 1962, peer qp: None
+[2025-11-17T07:51:00.540518584Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.540560655Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+[2025-11-17T07:51:00.540580186Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 4822, peer qp: None
+[2025-11-17T07:51:00.540625278Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.540648939Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+[2025-11-17T07:51:00.540711372Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.540731982Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d0318044040, length: 32768, access: 7, phys_addr: Some(64)
+master1:2467048:2467132 [1] NCCL INFO NET/IB: Dev 1 Port 1 qpn 1962 mtu 5 GID 0 (80FE/D5F8DEFEFF1ADE70)
+[2025-11-17T07:51:00.540804335Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 73440c044040, length: 32768, access: 7, phys_addr: Some(64)
+master1:2467047:2467131 [0] NCCL INFO NET/IB: Dev 0 Port 1 qpn 4822 mtu 5 GID 0 (80FE/98388EFEFFF55A7C)
+[2025-11-17T07:51:00.575934737Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.576110874Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 733fede00000, length: 262144, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.576220488Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.576316032Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 733fede40000, length: 458752, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.576417497Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.576497120Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 733fedeb0000, length: 4194304, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.576635336Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.576752261Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d0300200000, length: 262144, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.576857245Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.576937818Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d0300240000, length: 458752, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.577037213Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.577116236Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d03002b0000, length: 4194304, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.577308864Z INFO  bluerdma_rust::rxe::ctx_ops] Creating completion queue
+[2025-11-17T07:51:00.577396908Z INFO  blue_rdma_driver::verbs::mock] mock create cq, handle: 3
+[2025-11-17T07:51:00.577465490Z INFO  bluerdma_rust::rxe::ctx_ops] Creating queue pair
+[2025-11-17T07:51:00.577533243Z INFO  blue_rdma_driver::verbs::mock] set send cq: 3 for qp: 8414
+[2025-11-17T07:51:00.577602036Z INFO  blue_rdma_driver::verbs::mock] set recv cq: 3 for qp: 8414
+[2025-11-17T07:51:00.577719891Z INFO  blue_rdma_driver::verbs::mock] device binding to 0.0.0.0:18414
+[2025-11-17T07:51:00.577739042Z INFO  bluerdma_rust::rxe::ctx_ops] Creating completion queue
+[2025-11-17T07:51:00.577818405Z INFO  blue_rdma_driver::verbs::mock] mock create cq, handle: 3
+[2025-11-17T07:51:00.577887018Z INFO  bluerdma_rust::rxe::ctx_ops] Creating queue pair
+[2025-11-17T07:51:00.577951111Z INFO  blue_rdma_driver::verbs::mock] set send cq: 3 for qp: 7511
+[2025-11-17T07:51:00.577960001Z INFO  blue_rdma_driver::verbs::mock] mock create qp: 8414
+[2025-11-17T07:51:00.578019953Z INFO  blue_rdma_driver::verbs::mock] set recv cq: 3 for qp: 7511
+[2025-11-17T07:51:00.578031914Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.578090176Z INFO  blue_rdma_driver::verbs::mock] device binding to 0.0.0.0:17511
+[2025-11-17T07:51:00.578094336Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 8414, peer qp: None
+[2025-11-17T07:51:00.578163729Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+[2025-11-17T07:51:00.578228362Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.578287414Z INFO  blue_rdma_driver::verbs::mock] mock create qp: 7511
+[2025-11-17T07:51:00.578362848Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.578334756Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 73440c050040, length: 32768, access: 7, phys_addr: Some(64)
+master1:2467047:2467131 [0] NCCL INFO NET/IB: Dev 0 Port 1 qpn 8414 mtu 5 GID 0 (80FE/98388EFEFFF55A7C)
+[2025-11-17T07:51:00.578426620Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 7511, peer qp: None
+[2025-11-17T07:51:00.578494683Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+[2025-11-17T07:51:00.578557656Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.578826647Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d0318050040, length: 32768, access: 7, phys_addr: Some(64)
+master1:2467048:2467132 [1] NCCL INFO NET/IB: Dev 1 Port 1 qpn 7511 mtu 5 GID 0 (80FE/D5F8DEFEFF1ADE70)
+[2025-11-17T07:51:00.614741591Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.614919648Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 733fed600000, length: 262144, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.615074595Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.615163088Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 733fed640000, length: 458752, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.615243962Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.615315115Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.615364087Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d02f7800000, length: 262144, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.615401068Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 733fed6b0000, length: 4194304, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.615468751Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.615548754Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d02f7840000, length: 458752, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.615649548Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.615733132Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d02f78b0000, length: 4194304, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.616159060Z INFO  bluerdma_rust::rxe::ctx_ops] Creating completion queue
+[2025-11-17T07:51:00.616295905Z INFO  blue_rdma_driver::verbs::mock] mock create cq, handle: 4
+[2025-11-17T07:51:00.616371239Z INFO  bluerdma_rust::rxe::ctx_ops] Creating queue pair
+[2025-11-17T07:51:00.616363788Z INFO  bluerdma_rust::rxe::ctx_ops] Creating completion queue
+[2025-11-17T07:51:00.616443542Z INFO  blue_rdma_driver::verbs::mock] set send cq: 4 for qp: 166
+[2025-11-17T07:51:00.616448172Z INFO  blue_rdma_driver::verbs::mock] mock create cq, handle: 4
+[2025-11-17T07:51:00.616513955Z INFO  bluerdma_rust::rxe::ctx_ops] Creating queue pair
+[2025-11-17T07:51:00.616514965Z INFO  blue_rdma_driver::verbs::mock] set recv cq: 4 for qp: 166
+[2025-11-17T07:51:00.616581987Z INFO  blue_rdma_driver::verbs::mock] set send cq: 4 for qp: 549
+[2025-11-17T07:51:00.616587258Z INFO  blue_rdma_driver::verbs::mock] device binding to 0.0.0.0:10166
+[2025-11-17T07:51:00.616653140Z INFO  blue_rdma_driver::verbs::mock] set recv cq: 4 for qp: 549
+[2025-11-17T07:51:00.616725293Z INFO  blue_rdma_driver::verbs::mock] device binding to 0.0.0.0:10549
+[2025-11-17T07:51:00.616826847Z INFO  blue_rdma_driver::verbs::mock] mock create qp: 166
+[2025-11-17T07:51:00.616900681Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.616912031Z INFO  blue_rdma_driver::verbs::mock] mock create qp: 549
+[2025-11-17T07:51:00.616965513Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 166, peer qp: None
+[2025-11-17T07:51:00.616981554Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.617036326Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+[2025-11-17T07:51:00.617042496Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 549, peer qp: None
+[2025-11-17T07:51:00.617100139Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.617110399Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+[2025-11-17T07:51:00.617172002Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.617266786Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d031805c040, length: 32768, access: 7, phys_addr: Some(64)
+[2025-11-17T07:51:00.617188242Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 73440c05c040, length: 32768, access: 7, phys_addr: Some(64)
+master1:2467048:2467132 [1] NCCL INFO NET/IB: Dev 1 Port 1 qpn 549 mtu 5 GID 0 (80FE/D5F8DEFEFF1ADE70)
+master1:2467047:2467131 [0] NCCL INFO NET/IB: Dev 0 Port 1 qpn 166 mtu 5 GID 0 (80FE/98388EFEFFF55A7C)
+[2025-11-17T07:51:00.653260113Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.653426380Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d02f7000000, length: 262144, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.653533404Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.653612298Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d02f7040000, length: 458752, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.653711682Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.653789555Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d02f70b0000, length: 4194304, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.654419891Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+[2025-11-17T07:51:00.654513375Z INFO  bluerdma_rust::rxe::ctx_ops] Creating completion queue
+[2025-11-17T07:51:00.654589028Z INFO  blue_rdma_driver::verbs::mock] mock create cq, handle: 5
+[2025-11-17T07:51:00.654657411Z INFO  bluerdma_rust::rxe::ctx_ops] Creating queue pair
+[2025-11-17T07:51:00.654661541Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.654726084Z INFO  blue_rdma_driver::verbs::mock] set send cq: 5 for qp: 2715
+[2025-11-17T07:51:00.654793807Z INFO  blue_rdma_driver::verbs::mock] set recv cq: 5 for qp: 2715
+[2025-11-17T07:51:00.654783516Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 733fece00000, length: 262144, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.654866310Z INFO  blue_rdma_driver::verbs::mock] device binding to 0.0.0.0:12715
+[2025-11-17T07:51:00.654975314Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.655060898Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 733fece40000, length: 458752, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.655160652Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.655171472Z INFO  blue_rdma_driver::verbs::mock] mock create qp: 2715
+[2025-11-17T07:51:00.655244835Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.655239845Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 733feceb0000, length: 4194304, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.655323279Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 2715, peer qp: None
+[2025-11-17T07:51:00.655398232Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.655459604Z INFO  blue_rdma_driver::rdma_utils::types::ibv_qp_attr] gid: fe800000000000007c5af5fffe8e3898
+[2025-11-17T07:51:00.655541698Z INFO  blue_rdma_driver::verbs::mock] dest ip not provided for qp 2715, defaulting to loopback 127.0.0.1
+[2025-11-17T07:51:00.655631121Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 2715, peer qp: Some(6846)
+[2025-11-17T07:51:00.655706365Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.655702994Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+[2025-11-17T07:51:00.655768477Z INFO  blue_rdma_driver::verbs::mock] connect to dqpn: 6846, ip: 127.0.0.1
+[2025-11-17T07:51:00.655785468Z INFO  bluerdma_rust::rxe::ctx_ops] Creating completion queue
+[2025-11-17T07:51:00.655841280Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 2715, peer qp: None
+[2025-11-17T07:51:00.655911413Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.655852331Z INFO  blue_rdma_driver::verbs::mock] mock create cq, handle: 5
+[2025-11-17T07:51:00.656007667Z INFO  bluerdma_rust::rxe::ctx_ops] Creating queue pair
+[2025-11-17T07:51:00.656078750Z INFO  blue_rdma_driver::verbs::mock] set send cq: 5 for qp: 858
+[2025-11-17T07:51:00.656145773Z INFO  blue_rdma_driver::verbs::mock] set recv cq: 5 for qp: 858
+[2025-11-17T07:51:00.656142393Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d0318068040, length: 32768, access: 7, phys_addr: Some(64)
+[2025-11-17T07:51:00.656216136Z INFO  blue_rdma_driver::verbs::mock] device binding to 0.0.0.0:10858
+[2025-11-17T07:51:00.656408164Z INFO  blue_rdma_driver::verbs::mock] mock create qp: 858
+[2025-11-17T07:51:00.656485257Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.656560730Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 858, peer qp: None
+[2025-11-17T07:51:00.656637393Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.656698946Z INFO  blue_rdma_driver::rdma_utils::types::ibv_qp_attr] gid: fe8000000000000070de1afffedef8d5
+[2025-11-17T07:51:00.656779979Z INFO  blue_rdma_driver::verbs::mock] dest ip not provided for qp 858, defaulting to loopback 127.0.0.1
+[2025-11-17T07:51:00.656867683Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 858, peer qp: Some(9492)
+[2025-11-17T07:51:00.656952276Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.657097613Z INFO  blue_rdma_driver::verbs::mock] connect to dqpn: 9492, ip: 127.0.0.1
+[2025-11-17T07:51:00.657174816Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 858, peer qp: None
+[2025-11-17T07:51:00.657244939Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.657340093Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 73440c068040, length: 32768, access: 7, phys_addr: Some(64)
+[2025-11-17T07:51:00.692705614Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.692872730Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d02f6800000, length: 262144, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.692982845Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.693064418Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d02f6840000, length: 458752, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.693163373Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.693242216Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d02f68b0000, length: 4194304, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.693835371Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.693870972Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+[2025-11-17T07:51:00.693960536Z INFO  bluerdma_rust::rxe::ctx_ops] Creating completion queue
+[2025-11-17T07:51:00.693952535Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 733fec600000, length: 262144, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.694036409Z INFO  blue_rdma_driver::verbs::mock] mock create cq, handle: 6
+[2025-11-17T07:51:00.694055440Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.694104482Z INFO  bluerdma_rust::rxe::ctx_ops] Creating queue pair
+[2025-11-17T07:51:00.694140423Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 733fec640000, length: 458752, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.694172625Z INFO  blue_rdma_driver::verbs::mock] set send cq: 6 for qp: 5080
+[2025-11-17T07:51:00.694241397Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.694240677Z INFO  blue_rdma_driver::verbs::mock] set recv cq: 6 for qp: 5080
+[2025-11-17T07:51:00.694343872Z INFO  blue_rdma_driver::verbs::mock] device binding to 0.0.0.0:15080
+[2025-11-17T07:51:00.694355202Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 733fec6b0000, length: 4194304, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.694580592Z INFO  blue_rdma_driver::verbs::mock] mock create qp: 5080
+[2025-11-17T07:51:00.694748749Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.694818231Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 5080, peer qp: None
+[2025-11-17T07:51:00.694888924Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.694888154Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+[2025-11-17T07:51:00.694950177Z INFO  blue_rdma_driver::rdma_utils::types::ibv_qp_attr] gid: fe800000000000007c5af5fffe8e3898
+[2025-11-17T07:51:00.694969208Z INFO  bluerdma_rust::rxe::ctx_ops] Creating completion queue
+[2025-11-17T07:51:00.695035720Z INFO  blue_rdma_driver::verbs::mock] mock create cq, handle: 6
+[2025-11-17T07:51:00.695030950Z INFO  blue_rdma_driver::verbs::mock] dest ip not provided for qp 5080, defaulting to loopback 127.0.0.1
+[2025-11-17T07:51:00.695103173Z INFO  bluerdma_rust::rxe::ctx_ops] Creating queue pair
+[2025-11-17T07:51:00.695117254Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 5080, peer qp: Some(4822)
+[2025-11-17T07:51:00.695172556Z INFO  blue_rdma_driver::verbs::mock] set send cq: 6 for qp: 5035
+[2025-11-17T07:51:00.695191117Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.695244329Z INFO  blue_rdma_driver::verbs::mock] set recv cq: 6 for qp: 5035
+[2025-11-17T07:51:00.695250369Z INFO  blue_rdma_driver::verbs::mock] connect to dqpn: 4822, ip: 127.0.0.1
+[2025-11-17T07:51:00.695328523Z INFO  blue_rdma_driver::verbs::mock] device binding to 0.0.0.0:15035
+[2025-11-17T07:51:00.695331273Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 5080, peer qp: None
+[2025-11-17T07:51:00.695400986Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.695488919Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d0318073040, length: 32768, access: 7, phys_addr: Some(64)
+[2025-11-17T07:51:00.695518140Z INFO  blue_rdma_driver::verbs::mock] mock create qp: 5035
+[2025-11-17T07:51:00.695590794Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.695654306Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 5035, peer qp: None
+[2025-11-17T07:51:00.695724549Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.695785522Z INFO  blue_rdma_driver::rdma_utils::types::ibv_qp_attr] gid: fe8000000000000070de1afffedef8d5
+[2025-11-17T07:51:00.696037332Z INFO  blue_rdma_driver::verbs::mock] dest ip not provided for qp 5035, defaulting to loopback 127.0.0.1
+[2025-11-17T07:51:00.696133566Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 5035, peer qp: Some(1962)
+[2025-11-17T07:51:00.696209829Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.696286323Z INFO  blue_rdma_driver::verbs::mock] connect to dqpn: 1962, ip: 127.0.0.1
+[2025-11-17T07:51:00.696360376Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 5035, peer qp: None
+[2025-11-17T07:51:00.696431609Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.696516462Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 73440c073040, length: 32768, access: 7, phys_addr: Some(64)
+[2025-11-17T07:51:00.733564913Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.733713329Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.733850455Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d02f6000000, length: 262144, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.733851805Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 733fe4e00000, length: 262144, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.733958119Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.733958679Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.734038703Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 733fe4e40000, length: 458752, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.734038563Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d02f6040000, length: 458752, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.734137087Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.734137567Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.734216230Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d02f60b0000, length: 4194304, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.734216530Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 733fe4eb0000, length: 4194304, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.734736692Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+[2025-11-17T07:51:00.734735632Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+[2025-11-17T07:51:00.734827296Z INFO  bluerdma_rust::rxe::ctx_ops] Creating completion queue
+[2025-11-17T07:51:00.734882148Z INFO  bluerdma_rust::rxe::ctx_ops] Creating completion queue
+[2025-11-17T07:51:00.734900799Z INFO  blue_rdma_driver::verbs::mock] mock create cq, handle: 7
+[2025-11-17T07:51:00.734956311Z INFO  blue_rdma_driver::verbs::mock] mock create cq, handle: 7
+[2025-11-17T07:51:00.734966401Z INFO  bluerdma_rust::rxe::ctx_ops] Creating queue pair
+[2025-11-17T07:51:00.735023324Z INFO  bluerdma_rust::rxe::ctx_ops] Creating queue pair
+[2025-11-17T07:51:00.735031934Z INFO  blue_rdma_driver::verbs::mock] set send cq: 7 for qp: 6587
+[2025-11-17T07:51:00.735088396Z INFO  blue_rdma_driver::verbs::mock] set send cq: 7 for qp: 861
+[2025-11-17T07:51:00.735097927Z INFO  blue_rdma_driver::verbs::mock] set recv cq: 7 for qp: 6587
+[2025-11-17T07:51:00.735155629Z INFO  blue_rdma_driver::verbs::mock] set recv cq: 7 for qp: 861
+[2025-11-17T07:51:00.735167610Z INFO  blue_rdma_driver::verbs::mock] device binding to 0.0.0.0:16587
+[2025-11-17T07:51:00.735225582Z INFO  blue_rdma_driver::verbs::mock] device binding to 0.0.0.0:10861
+[2025-11-17T07:51:00.735457672Z INFO  blue_rdma_driver::verbs::mock] dropping qp connection for qpn: 858
+[2025-11-17T07:51:00.735541265Z INFO  blue_rdma_driver::verbs::mock] mock create qp: 861
+[2025-11-17T07:51:00.735448631Z INFO  blue_rdma_driver::verbs::mock] mock create qp: 6587
+[2025-11-17T07:51:00.735605198Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.735667430Z INFO  blue_rdma_driver::verbs::mock] connect to dqpn: 9492, ip: 127.0.0.1
+[2025-11-17T07:51:00.735710102Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.735741744Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 861, peer qp: None
+[2025-11-17T07:51:00.735784795Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 6587, peer qp: None
+[2025-11-17T07:51:00.735854288Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.735855168Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.735915811Z INFO  blue_rdma_driver::rdma_utils::types::ibv_qp_attr] gid: fe800000000000007c5af5fffe8e3898
+[2025-11-17T07:51:00.735996774Z INFO  blue_rdma_driver::verbs::mock] dest ip not provided for qp 6587, defaulting to loopback 127.0.0.1
+[2025-11-17T07:51:00.735998344Z INFO  blue_rdma_driver::rdma_utils::types::ibv_qp_attr] gid: fe8000000000000070de1afffedef8d5
+[2025-11-17T07:51:00.736084338Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 6587, peer qp: Some(8414)
+[2025-11-17T07:51:00.736087008Z INFO  blue_rdma_driver::verbs::mock] connect to dqpn: 7511, ip: 127.0.0.1
+[2025-11-17T07:51:00.736158601Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.736159511Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 861, peer qp: Some(7511)
+[2025-11-17T07:51:00.736219593Z INFO  blue_rdma_driver::verbs::mock] connect to dqpn: 8414, ip: 127.0.0.1
+[2025-11-17T07:51:00.736231424Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.736302707Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 6587, peer qp: None
+[2025-11-17T07:51:00.736303127Z INFO  blue_rdma_driver::verbs::mock] connect to dqpn: 7511, ip: 127.0.0.1
+[2025-11-17T07:51:00.736374640Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.736374330Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 861, peer qp: None
+[2025-11-17T07:51:00.736442063Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.736459363Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d031807e040, length: 32768, access: 7, phys_addr: Some(64)
+[2025-11-17T07:51:00.736527376Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 73440c07e040, length: 32768, access: 7, phys_addr: Some(64)
+[2025-11-17T07:51:00.773843148Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.774011725Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 733fe4800000, length: 262144, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.774118360Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.774197973Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 733fe4840000, length: 458752, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.774306678Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.774388541Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 733fe48b0000, length: 4194304, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.774813259Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.774929103Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d02f5800000, length: 262144, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.775031798Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.775112401Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d02f5840000, length: 458752, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.775270638Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.775361261Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d02f58b0000, length: 4194304, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.775445895Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+[2025-11-17T07:51:00.775538699Z INFO  bluerdma_rust::rxe::ctx_ops] Creating completion queue
+[2025-11-17T07:51:00.775624442Z INFO  blue_rdma_driver::verbs::mock] mock create cq, handle: 8
+[2025-11-17T07:51:00.775698745Z INFO  bluerdma_rust::rxe::ctx_ops] Creating queue pair
+[2025-11-17T07:51:00.775826241Z INFO  bluerdma_rust::rxe::ctx_ops] Querying port attributes
+[2025-11-17T07:51:00.775874453Z INFO  blue_rdma_driver::verbs::mock] set send cq: 8 for qp: 3663
+[2025-11-17T07:51:00.775910754Z INFO  bluerdma_rust::rxe::ctx_ops] Creating completion queue
+[2025-11-17T07:51:00.775953176Z INFO  blue_rdma_driver::verbs::mock] set recv cq: 8 for qp: 3663
+[2025-11-17T07:51:00.775984787Z INFO  blue_rdma_driver::verbs::mock] mock create cq, handle: 8
+[2025-11-17T07:51:00.776029069Z INFO  blue_rdma_driver::verbs::mock] device binding to 0.0.0.0:13663
+[2025-11-17T07:51:00.776051890Z INFO  bluerdma_rust::rxe::ctx_ops] Creating queue pair
+[2025-11-17T07:51:00.776119903Z INFO  blue_rdma_driver::verbs::mock] set send cq: 8 for qp: 5972
+[2025-11-17T07:51:00.776193476Z INFO  blue_rdma_driver::verbs::mock] set recv cq: 8 for qp: 5972
+[2025-11-17T07:51:00.776287580Z INFO  blue_rdma_driver::verbs::mock] mock create qp: 3663
+[2025-11-17T07:51:00.776360693Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.776362523Z INFO  blue_rdma_driver::verbs::mock] device binding to 0.0.0.0:15972
+[2025-11-17T07:51:00.776427236Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 3663, peer qp: None
+[2025-11-17T07:51:00.776497699Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.776542861Z INFO  blue_rdma_driver::verbs::mock] mock create qp: 5972
+[2025-11-17T07:51:00.776558421Z INFO  blue_rdma_driver::rdma_utils::types::ibv_qp_attr] gid: fe8000000000000070de1afffedef8d5
+[2025-11-17T07:51:00.776637955Z INFO  blue_rdma_driver::verbs::mock] dest ip not provided for qp 3663, defaulting to loopback 127.0.0.1
+[2025-11-17T07:51:00.776726218Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 3663, peer qp: Some(549)
+[2025-11-17T07:51:00.776801221Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.776825962Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.776884795Z INFO  blue_rdma_driver::verbs::mock] connect to dqpn: 549, ip: 127.0.0.1
+[2025-11-17T07:51:00.776896215Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 5972, peer qp: None
+[2025-11-17T07:51:00.776964468Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.776964798Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 3663, peer qp: None
+[2025-11-17T07:51:00.777033811Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.777027431Z INFO  blue_rdma_driver::rdma_utils::types::ibv_qp_attr] gid: fe800000000000007c5af5fffe8e3898
+[2025-11-17T07:51:00.777105954Z INFO  blue_rdma_driver::verbs::mock] dest ip not provided for qp 5972, defaulting to loopback 127.0.0.1
+[2025-11-17T07:51:00.777120875Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 73440c089040, length: 32768, access: 7, phys_addr: Some(64)
+[2025-11-17T07:51:00.777193388Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 5972, peer qp: Some(166)
+[2025-11-17T07:51:00.777275491Z INFO  bluerdma_rust::rxe::ctx_ops] Modifying queue pair
+[2025-11-17T07:51:00.777337974Z INFO  blue_rdma_driver::verbs::mock] connect to dqpn: 166, ip: 127.0.0.1
+[2025-11-17T07:51:00.777460549Z INFO  blue_rdma_driver::verbs::mock] mock update qp: 5972, peer qp: None
+[2025-11-17T07:51:00.777537662Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.777622225Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d0318089040, length: 32768, access: 7, phys_addr: Some(64)
+[2025-11-17T07:51:00.815338704Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.815505751Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 733fcba00000, length: 262144, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.815612696Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.815693279Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 733fcba40000, length: 458752, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.815791963Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.815870526Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 733fcbab0000, length: 4194304, access: 7, phys_addr: Some(0)
+master1:2467047:2467047 [0] NCCL INFO Connected all rings comm 0x3b0b38f0 nRanks 02 busId 4000
+master1:2467047:2467047 [0] NCCL INFO Connected all trees comm 0x3b0b38f0 nRanks 02 busId 4000
+master1:2467047:2467047 [0] NCCL INFO Using tuning table 0 with LL128 disabled
+master1:2467047:2467047 [0] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 8/8/256
+master1:2467047:2467047 [0] NCCL INFO 4 coll channels, 2 p2p channels, 1 p2p channels per peer
+master1:2467047:2467131 [0] NCCL INFO New proxy send connection 8 from local rank 0, transport 2
+[2025-11-17T07:51:00.816711801Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.816832126Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d02f5000000, length: 262144, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.816935701Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.817015324Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d02f5040000, length: 458752, access: 7, phys_addr: Some(0)
+[2025-11-17T07:51:00.817114858Z INFO  bluerdma_rust::rxe::ctx_ops] Registering memory region
+[2025-11-17T07:51:00.817201272Z INFO  blue_rdma_driver::verbs::mock] mock reg mr, virt addr: 7d02f50b0000, length: 4194304, access: 7, phys_addr: Some(0)
+master1:2467048:2467048 [1] NCCL INFO Connected all rings comm 0x7198c80 nRanks 02 busId 26000
+master1:2467048:2467048 [1] NCCL INFO Connected all trees comm 0x7198c80 nRanks 02 busId 26000
+master1:2467048:2467048 [1] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 8/8/256
+master1:2467048:2467048 [1] NCCL INFO 4 coll channels, 2 p2p channels, 1 p2p channels per peer
+master1:2467048:2467132 [1] NCCL INFO New proxy send connection 8 from local rank 0, transport 2
+master1:2467047:2467047 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x73440c001830
+master1:2467048:2467048 [1] NCCL INFO Connection to proxy localRank 0 -> connection 0x7d03180017b0
+master1:2467048:2467048 [1] NCCL INFO comm 0x7198c80 rank 1 nranks 2 cudaDev 1 busId 26000 localSize 136 used 4207616 bytes - Init COMPLETE
+Rank 1 ncclCommInitRank succeeded
+master1:2467047:2467047 [0] NCCL INFO comm 0x3b0b38f0 rank 0 nranks 2 cudaDev 0 busId 4000 localSize 136 used 4207616 bytes - Init COMPLETE
+Rank 0 ncclCommInitRank succeeded
+[2025-11-17T07:51:00.974038705Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.974158410Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.974240513Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.974322097Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.974399890Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.974470843Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.975443283Z INFO  bluerdma_rust::rxe::ctx_ops] Destroying queue pair
+[2025-11-17T07:51:00.975526037Z INFO  blue_rdma_driver::verbs::mock] destroying qp: 2715
+[2025-11-17T07:51:00.975721235Z INFO  blue_rdma_driver::verbs::mock] dropping qp connection for qpn: 2715
+[2025-11-17T07:51:00.975907083Z INFO  blue_rdma_driver::verbs::mock] qp: 2715 destroyed
+[2025-11-17T07:51:00.975982346Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.976051129Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.976115121Z INFO  bluerdma_rust::rxe::ctx_ops] Destroying completion queue
+[2025-11-17T07:51:00.976180664Z INFO  blue_rdma_driver::verbs::mock] mock destroy cq, handle: 5
+[2025-11-17T07:51:00.976247697Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.976327020Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.976384953Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.976448405Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.976506028Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.976569420Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.978064553Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.978154486Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.978232930Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.978319613Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.978395486Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.978463429Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.979208110Z INFO  bluerdma_rust::rxe::ctx_ops] Destroying queue pair
+[2025-11-17T07:51:00.979298734Z INFO  blue_rdma_driver::verbs::mock] destroying qp: 5080
+[2025-11-17T07:51:00.979357936Z INFO  bluerdma_rust::rxe::ctx_ops] Destroying queue pair
+[2025-11-17T07:51:00.979436970Z INFO  blue_rdma_driver::verbs::mock] destroying qp: 858
+[2025-11-17T07:51:00.979765173Z INFO  blue_rdma_driver::verbs::mock] dropping qp connection for qpn: 861
+[2025-11-17T07:51:00.979912849Z INFO  blue_rdma_driver::verbs::mock] qp: 858 destroyed
+[2025-11-17T07:51:00.979968112Z INFO  blue_rdma_driver::verbs::mock] dropping qp connection for qpn: 5080
+[2025-11-17T07:51:00.979985382Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.980049715Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.980083567Z INFO  blue_rdma_driver::verbs::mock] qp: 5080 destroyed
+[2025-11-17T07:51:00.980108768Z INFO  bluerdma_rust::rxe::ctx_ops] Destroying completion queue
+[2025-11-17T07:51:00.980147599Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.980174090Z INFO  blue_rdma_driver::verbs::mock] mock destroy cq, handle: 5
+[2025-11-17T07:51:00.980211652Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.980241243Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.980278125Z INFO  bluerdma_rust::rxe::ctx_ops] Destroying completion queue
+[2025-11-17T07:51:00.980317466Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.980335327Z INFO  blue_rdma_driver::verbs::mock] mock destroy cq, handle: 6
+[2025-11-17T07:51:00.980377289Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.980395329Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.980442931Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.980456452Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.980500374Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.980511944Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.980563886Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.980569877Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.980627069Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.980692422Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.981552357Z INFO  bluerdma_rust::rxe::ctx_ops] Destroying queue pair
+[2025-11-17T07:51:00.981623310Z INFO  blue_rdma_driver::verbs::mock] destroying qp: 6587
+[2025-11-17T07:51:00.982054118Z INFO  blue_rdma_driver::verbs::mock] dropping qp connection for qpn: 6587
+[2025-11-17T07:51:00.982165473Z INFO  blue_rdma_driver::verbs::mock] qp: 6587 destroyed
+[2025-11-17T07:51:00.982230386Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.982337780Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.982400173Z INFO  bluerdma_rust::rxe::ctx_ops] Destroying completion queue
+[2025-11-17T07:51:00.982460105Z INFO  blue_rdma_driver::verbs::mock] mock destroy cq, handle: 7
+[2025-11-17T07:51:00.982520728Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.982578770Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.982638113Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.982699605Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.982751637Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.982826490Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.983167155Z INFO  bluerdma_rust::rxe::ctx_ops] Destroying queue pair
+[2025-11-17T07:51:00.983264459Z INFO  blue_rdma_driver::verbs::mock] destroying qp: 5035
+[2025-11-17T07:51:00.983662335Z INFO  bluerdma_rust::rxe::ctx_ops] Destroying queue pair
+[2025-11-17T07:51:00.983735738Z INFO  blue_rdma_driver::verbs::mock] destroying qp: 5972
+[2025-11-17T07:51:00.983996339Z INFO  blue_rdma_driver::verbs::mock] dropping qp connection for qpn: 5035
+[2025-11-17T07:51:00.984113404Z INFO  blue_rdma_driver::verbs::mock] qp: 5035 destroyed
+[2025-11-17T07:51:00.984179277Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.984237549Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.984300242Z INFO  bluerdma_rust::rxe::ctx_ops] Destroying completion queue
+[2025-11-17T07:51:00.984359834Z INFO  blue_rdma_driver::verbs::mock] mock destroy cq, handle: 6
+[2025-11-17T07:51:00.984470589Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.984538942Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.984591234Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.984649526Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.984701068Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.984758631Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.984779282Z INFO  blue_rdma_driver::verbs::mock] dropping qp connection for qpn: 5972
+[2025-11-17T07:51:00.984890996Z INFO  blue_rdma_driver::verbs::mock] qp: 5972 destroyed
+[2025-11-17T07:51:00.984963449Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.985028962Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.985082244Z INFO  bluerdma_rust::rxe::ctx_ops] Destroying completion queue
+[2025-11-17T07:51:00.985139627Z INFO  blue_rdma_driver::verbs::mock] mock destroy cq, handle: 8
+[2025-11-17T07:51:00.985200529Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.985272962Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.985330515Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.985388877Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.985440279Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.985499162Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.985616427Z INFO  bluerdma_rust::rxe::ctx_ops] Destroying queue pair
+[2025-11-17T07:51:00.985688300Z INFO  blue_rdma_driver::verbs::mock] destroying qp: 861
+
+thread '<unnamed>' (2467131) panicked at /home/peng/projects/rdma_all/blue-rdma-driver/rust-driver/src/verbs/mock.rs:384:18:
+called `Option::unwrap()` on a `None` value
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread '<unnamed>' (2467131) panicked at library/core/src/panicking.rs:225:5:
+panic in a function that cannot unwind
+stack backtrace:
+[2025-11-17T07:51:00.986601658Z INFO  bluerdma_rust::rxe::ctx_ops] Destroying queue pair
+[2025-11-17T07:51:00.986673941Z INFO  blue_rdma_driver::verbs::mock] destroying qp: 9492
+[2025-11-17T07:51:00.987423302Z INFO  blue_rdma_driver::verbs::mock] dropping qp connection for qpn: 9492
+[2025-11-17T07:51:00.987535046Z INFO  blue_rdma_driver::verbs::mock] qp: 9492 destroyed
+[2025-11-17T07:51:00.987597089Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.987654391Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.987707124Z INFO  bluerdma_rust::rxe::ctx_ops] Destroying completion queue
+[2025-11-17T07:51:00.987769586Z INFO  blue_rdma_driver::verbs::mock] mock destroy cq, handle: 1
+[2025-11-17T07:51:00.987833649Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.987891951Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.987943183Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.988000416Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.988051558Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.988108650Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.989106732Z INFO  bluerdma_rust::rxe::ctx_ops] Destroying queue pair
+[2025-11-17T07:51:00.989178425Z INFO  blue_rdma_driver::verbs::mock] destroying qp: 1962
+[2025-11-17T07:51:00.989274559Z INFO  blue_rdma_driver::verbs::mock] dropping qp connection for qpn: 1962
+[2025-11-17T07:51:00.989390094Z INFO  blue_rdma_driver::verbs::mock] qp: 1962 destroyed
+[2025-11-17T07:51:00.989453956Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.989511619Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.989564001Z INFO  bluerdma_rust::rxe::ctx_ops] Destroying completion queue
+[2025-11-17T07:51:00.989621073Z INFO  blue_rdma_driver::verbs::mock] mock destroy cq, handle: 2
+[2025-11-17T07:51:00.989680336Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.989737768Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.989788910Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.989846012Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.989899365Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.989963167Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.990799512Z INFO  bluerdma_rust::rxe::ctx_ops] Destroying queue pair
+[2025-11-17T07:51:00.990870775Z INFO  blue_rdma_driver::verbs::mock] destroying qp: 7511
+[2025-11-17T07:51:00.991447989Z INFO  blue_rdma_driver::verbs::mock] dropping qp connection for qpn: 7511
+[2025-11-17T07:51:00.991561904Z INFO  blue_rdma_driver::verbs::mock] qp: 7511 destroyed
+[2025-11-17T07:51:00.991624627Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.991683129Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.991736101Z INFO  bluerdma_rust::rxe::ctx_ops] Destroying completion queue
+[2025-11-17T07:51:00.991793364Z INFO  blue_rdma_driver::verbs::mock] mock destroy cq, handle: 3
+[2025-11-17T07:51:00.991853086Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.991910518Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.991961350Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.992019083Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.992074205Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.992136818Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.993148850Z INFO  bluerdma_rust::rxe::ctx_ops] Destroying queue pair
+[2025-11-17T07:51:00.993224453Z INFO  blue_rdma_driver::verbs::mock] destroying qp: 549
+[2025-11-17T07:51:00.994245315Z INFO  blue_rdma_driver::verbs::mock] dropping qp connection for qpn: 549
+[2025-11-17T07:51:00.994366200Z INFO  blue_rdma_driver::verbs::mock] qp: 549 destroyed
+[2025-11-17T07:51:00.994428943Z INFO  bluerdma_rust::rxe::ctx_ops] Deregistering memory region
+[2025-11-17T07:51:00.994486275Z INFO  blue_rdma_driver::verbs::mock] mock dereg mr
+[2025-11-17T07:51:00.994539788Z INFO  bluerdma_rust::rxe::ctx_ops] Destroying completion queue
+[2025-11-17T07:51:00.994597110Z INFO  blue_rdma_driver::verbs::mock] mock destroy cq, handle: 4
+[2025-11-17T07:51:00.994655902Z INFO  bluerdma_rust::rxe::ctx_ops] Deallocating protection domain
+master1:2467048:2467048 [1] NCCL INFO comm 0x7198c80 rank 1 nranks 2 cudaDev 1 busId 26000 - Destroy COMPLETE
+   0:     0x734420957362 - std::backtrace_rs::backtrace::libunwind::trace::hd6a158ff8b4ced9f
+                               at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/std/src/../../backtrace/src/backtrace/libunwind.rs:117:9
+   1:     0x734420957362 - std::backtrace_rs::backtrace::trace_unsynchronized::h92e289be85f564b0
+                               at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/std/src/../../backtrace/src/backtrace/mod.rs:66:14
+   2:     0x734420957362 - std::sys::backtrace::_print_fmt::h7593c35e5f3bf237
+                               at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/std/src/sys/backtrace.rs:66:9
+   3:     0x734420957362 - <std::sys::backtrace::BacktraceLock::print::DisplayBacktrace as core::fmt::Display>::fmt::haa87a551a4affa55
+                               at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/std/src/sys/backtrace.rs:39:26
+   4:     0x73442096909f - core::fmt::rt::Argument::fmt::h4b16ed950bbe015d
+                               at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/core/src/fmt/rt.rs:173:76
+   5:     0x73442096909f - core::fmt::write::h80461e1e45e4fdd2
+                               at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/core/src/fmt/mod.rs:1468:25
+   6:     0x73442092f0b1 - std::io::default_write_fmt::h9e4845ee80fefc13
+                               at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/std/src/io/mod.rs:639:11
+   7:     0x73442092f0b1 - std::io::Write::write_fmt::h6e6c69b2d6337d9b
+                               at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/std/src/io/mod.rs:1954:13
+   8:     0x734420936102 - std::sys::backtrace::BacktraceLock::print::hf67a46baa621998e
+                               at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/std/src/sys/backtrace.rs:42:9
+   9:     0x7344209389bf - std::panicking::default_hook::{{closure}}::h391aa815d5e47ec8
+                               at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/std/src/panicking.rs:301:27
+  10:     0x734420938819 - std::panicking::default_hook::hd6fdcf2489bb807d
+                               at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/std/src/panicking.rs:328:9
+  11:     0x734420939045 - std::panicking::panic_with_hook::h185ddfb86bf14d73
+                               at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/std/src/panicking.rs:834:13
+  12:     0x734420938ea6 - std::panicking::panic_handler::{{closure}}::had89ddd01b6112c9
+                               at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/std/src/panicking.rs:700:13
+  13:     0x734420936239 - std::sys::backtrace::__rust_end_short_backtrace::h5d0fc36eef7265ea
+                               at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/std/src/sys/backtrace.rs:174:18
+  14:     0x73442092290d - __rustc[eb8946e36839644a]::rust_begin_unwind
+                               at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/std/src/panicking.rs:698:5
+  15:     0x734420973b2d - core::panicking::panic_nounwind_fmt::runtime::hecbbeaf03a90a418
+                               at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/core/src/panicking.rs:117:22
+  16:     0x734420973b2d - core::panicking::panic_nounwind_fmt::h622822847ebd61be
+                               at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/core/src/intrinsics/mod.rs:2435:9
+  17:     0x734420973a72 - core::panicking::panic_nounwind::h0b58b167cb35d9fe
+                               at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/core/src/panicking.rs:225:5
+  18:     0x734420973c87 - core::panicking::panic_cannot_unwind::hebe3a4840b691755
+                               at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/core/src/panicking.rs:337:5
+  19:     0x7344203deb2e - bluerdma_destroy_qp
+                               at /home/peng/projects/rdma_all/blue-rdma-driver/dtld-ibverbs/src/rxe/ctx_ops.rs:80:1
+  20:     0x73442c63ff8f - _Z19wrap_ibv_destroy_qpP6ibv_qp
+  21:     0x73442c65b9b4 - _Z15ncclIbCloseRecvPv
+  22:     0x73442c655be9 - _ZL16ncclNetCloseRecvP8ncclCommPv
+  23:     0x73442c653ea6 - _ZL13recvProxyFreeP19ncclProxyConnectionP8ncclComm
+  24:     0x73442c66e066 - _Z16ncclProxyServicePv
+  25:     0x73442b69caa4 - <unknown>
+  26:     0x73442b729c6c - <unknown>
+  27:                0x0 - <unknown>
+thread caused non-unwinding panic. aborting.
+[master1:2467047] *** Process received signal ***
+[master1:2467047] Signal: Aborted (6)
+[master1:2467047] Signal code:  (-6)
+[master1:2467047] [ 0] /lib/x86_64-linux-gnu/libc.so.6(+0x45330)[0x73442b645330]
+[master1:2467047] [ 1] /lib/x86_64-linux-gnu/libc.so.6(pthread_kill+0x11c)[0x73442b69eb2c]
+[master1:2467047] [ 2] /lib/x86_64-linux-gnu/libc.so.6(gsignal+0x1e)[0x73442b64527e]
+[master1:2467047] [ 3] /lib/x86_64-linux-gnu/libc.so.6(abort+0xdf)[0x73442b6288ff]
+[master1:2467047] [ 4] /home/peng/projects/rdma_all/blue-rdma-driver/dtld-ibverbs/target/debug/libbluerdma_rust.so(+0x7328ba)[0x7344209328ba]
+[master1:2467047] [ 5] /home/peng/projects/rdma_all/blue-rdma-driver/dtld-ibverbs/target/debug/libbluerdma_rust.so(+0x738679)[0x734420938679]
+[master1:2467047] [ 6] /home/peng/projects/rdma_all/blue-rdma-driver/dtld-ibverbs/target/debug/libbluerdma_rust.so(+0x7391fb)[0x7344209391fb]
+[master1:2467047] [ 7] /home/peng/projects/rdma_all/blue-rdma-driver/dtld-ibverbs/target/debug/libbluerdma_rust.so(+0x738ea6)[0x734420938ea6]
+[master1:2467047] [ 8] /home/peng/projects/rdma_all/blue-rdma-driver/dtld-ibverbs/target/debug/libbluerdma_rust.so(+0x736239)[0x734420936239]
+[master1:2467047] [ 9] /home/peng/projects/rdma_all/blue-rdma-driver/dtld-ibverbs/target/debug/libbluerdma_rust.so(+0x72290d)[0x73442092290d]
+[master1:2467047] [10] /home/peng/projects/rdma_all/blue-rdma-driver/dtld-ibverbs/target/debug/libbluerdma_rust.so(+0x773b2d)[0x734420973b2d]
+[master1:2467047] [11] /home/peng/projects/rdma_all/blue-rdma-driver/dtld-ibverbs/target/debug/libbluerdma_rust.so(+0x773a72)[0x734420973a72]
+[master1:2467047] [12] /home/peng/projects/rdma_all/blue-rdma-driver/dtld-ibverbs/target/debug/libbluerdma_rust.so(+0x773c87)[0x734420973c87]
+[master1:2467047] [13] /home/peng/projects/rdma_all/blue-rdma-driver/dtld-ibverbs/target/debug/libbluerdma_rust.so(bluerdma_destroy_qp+0x3e)[0x7344203deb2e]
+[master1:2467047] [14] /opt/dtk/lib/librccl.so.1(+0x3ff8f)[0x73442c63ff8f]
+[master1:2467047] [15] /opt/dtk/lib/librccl.so.1(+0x5b9b4)[0x73442c65b9b4]
+[master1:2467047] [16] /opt/dtk/lib/librccl.so.1(+0x55be9)[0x73442c655be9]
+[master1:2467047] [17] /opt/dtk/lib/librccl.so.1(+0x53ea6)[0x73442c653ea6]
+[master1:2467047] [18] /opt/dtk/lib/librccl.so.1(+0x6e066)[0x73442c66e066]
+[master1:2467047] [19] /lib/x86_64-linux-gnu/libc.so.6(+0x9caa4)[0x73442b69caa4]
+[master1:2467047] [20] /lib/x86_64-linux-gnu/libc.so.6(+0x129c6c)[0x73442b729c6c]
+[master1:2467047] *** End of error message ***
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 0 on node master1 exited on signal 6 (Aborted).
+--------------------------------------------------------------------------
+make: *** [Makefile:103: run_rdma_force] Error 134
